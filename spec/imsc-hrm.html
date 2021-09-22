@@ -203,8 +203,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of [[IMSC]] <a>Document
-    Instances</a>.</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of <a>Document
+    Instances</a> that conform to any profile defined in any edition of [[!imsc]].</p>
   </section>
 
   <section id='conventions'>
@@ -232,8 +232,14 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   </section>
 
   <section id="conformance">
-    A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
-    is processed without error as defined in <a href="#hypothetical-render-model-general"></a>.
+    <p>
+      Unless noted otherwise, this specification applies to any <a>Document Instance</a> that conforms to any profile defined 
+      in any edition of [[!imsc]].
+    </p>
+    <p>
+      A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
+      is processed without error as defined in <a href="#hypothetical-render-model-general"></a>.
+    </p>
   </section>
 
 
@@ -519,7 +525,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <h2>Paint Text</h2>
 
       <p>In the context of this section, a <dfn>glyph</dfn> is a tuple consisting of (i) one character and (ii) the computed values
-      of the following style properties:</p>
+      of the following style properties, excluding those properties that are associated with a Feature or Extension that is designate
+      at <em>prohibited</em> in the profile to which the <a>Document Instance</a> conforms:</p>
 
       <ul>
         <li><code>tts:color</code></li>
