@@ -410,7 +410,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="note">An element and its parent that satisfy the criteria above and share identical computed values 
         of <code>tts:backgroundColor</code> are counted as two distinct elements for the purpose of computing NBG(R<sub>i</sub>).</p>
-    </section>
+
+      <p class="note">The <code>set</code> element is not included in the computation of NBG(R<sub>i</sub>). While it can affect the
+      computed values of <code>tts:backgroundColor</code>, it is removed during <a>Intermediate Synchronic Document</a>
+      construction.</p>
+  
+      </section>
 
     <section id='paint-images'>
       <h2>Paint Images</h2>
