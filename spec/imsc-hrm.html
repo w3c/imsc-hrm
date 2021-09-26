@@ -189,7 +189,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 <body>
   <section id='abstract'>
     <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the
-   complexity of [[IMSC]] <a>Document Instances</a>.</p>
+   complexity of an <a>IMSC Document Instance</a>.</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
     model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
@@ -203,8 +203,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of <a>Document
-    Instances</a> that conform to any profile defined in any edition of [[!imsc]].</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of .</p>
   </section>
 
   <section id='conventions'>
@@ -217,6 +216,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section id='terms'>
     <h2>Terms and Definitions</h2>
     <p><dfn data-lt="Document Instance|Document Instances">Document Instance</dfn>. See Section 2.2 at [[!ttml2]].</p>
+
+    <p><dfn>IMSC Document Instance</dfn>. <a>Document Instance</a> that conform to any profile defined in any edition of
+    [[!imsc]].</p>
+
+    <p><dfn>effective content profile</dfn>. See Section 2.2 at [[!ttml2]].</p>
 
     <p><dfn>Intermediate Synchronic Document</dfn>. See Section 9.3.2 at [[!ttml2]].</p>
     <p><dfn>Root Container Region</dfn>. See Section 2.2 at [[!ttml2]].</p>
@@ -233,8 +237,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id="conformance">
     <p>
-      Unless noted otherwise, this specification applies to any <a>Document Instance</a> that conforms to any profile defined 
-      in any edition of [[!imsc]].
+      Unless noted otherwise, this specification applies to an <a>IMSC Document Instance</a>.
     </p>
     <p>
       A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
@@ -254,11 +257,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </figcaption>
       </figure>
 
-      <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive <a data-lt="intermediate synchronic document">intermediate synchronic documents</a>
-      obtained from an input <a>Document Instance</a>, and uses a simple double buffering model: while an <a>intermediate
-      synchronic document</a> E<sub>n</sub> is being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the
-      model), the previous <a>intermediate synchronic document</a> E<sub>n-1</sub> is available for display in Presentation Buffer
-      P<sub>n-1</sub> (the "back buffer" of the model).</p>
+      <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive
+      <a data-lt="intermediate synchronic document">intermediate synchronic documents</a> obtained from an input <a>IMSC Document
+      Instance</a>, and uses a simple double buffering model: while an <a>intermediate synchronic document</a> E<sub>n</sub> is
+      being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the model), the previous <a>intermediate
+      synchronic document</a> E<sub>n-1</sub> is available for display in Presentation Buffer P<sub>n-1</sub> (the "back buffer" of
+      the model).</p>
 
       <p>The model specifies an (hypothetical) time required for completely painting an <a>intermediate synchronic document</a> as
       a proxy for complexity. Painting includes drawing region backgrounds, rendering and copying glyphs, and decoding and copying
@@ -525,8 +529,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <h2>Paint Text</h2>
 
       <p>In the context of this section, a <dfn>glyph</dfn> is a tuple consisting of (i) one character and (ii) the computed values
-      of the following style properties, excluding those properties that are associated with a Feature or Extension that is designate
-      at <em>prohibited</em> in the profile to which the <a>Document Instance</a> conforms:</p>
+      of the following style properties, excluding those properties that are associated with a Feature or Extension that is
+      designated as <em>prohibited</em> in the <a>effective content profile</a> of the <a>IMSC Document Instance</a>:</p>
 
       <ul>
         <li><code>tts:color</code></li>
