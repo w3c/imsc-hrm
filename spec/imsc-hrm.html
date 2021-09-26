@@ -229,6 +229,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p><dfn>presented region</dfn>. See [[!imsc]].</p>
 
       <p><dfn>presented image</dfn>. See [[!imsc]].</p>
+      
+      <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with at least one <a>presented region</a>.</p>
   </section>
 
   <section id="conformance">
@@ -280,7 +282,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       document</a> E<sub>n</sub> using the following steps in order:</p>
 
       <ol>
-        <li>clear the pixels of the entire <a>Root Container Region</a>, unless n=0 or E<sub>n-1</sub> was empty;</li>
+        <li>clear the pixels of the entire <a>Root Container Region</a>, unless n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>;</li>
 
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
@@ -293,14 +295,14 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <ul>
         <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which m&lt;n and E<sub>m-1</sub>
-        is not empty, if E<sub>m</sub> exists and the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than
+        is not an <a>empty ISD</a>, if E<sub>m</sub> exists and the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than
         <a>IPD</a>; or</li>
         
         <li>at the presentation time of E<sub>0</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
       <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and sequences of
-      empty ISDs are handled as a single ISD.</p>
+        <a>empty ISDs</a> are handled as a single ISD.</p>
 
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>intermediate synchronic document</a> E<sub>n</sub> in the Presentation
       Buffer P<sub>n</sub> SHALL be:</p>
@@ -377,7 +379,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 0 if n=0 or E<sub>n-1</sub> is empty, and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 0 if n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>, and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
 
       <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>intermediate synchronic document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
