@@ -294,11 +294,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
-        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which m&lt;n and E<sub>m-1</sub>
-        is not an <a>empty ISD</a>, if E<sub>m</sub> exists and the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than
-        <a>IPD</a>; or</li>
+        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m-1</sub>
+        is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or
+      </li>
         
-        <li>at the presentation time of E<sub>0</sub> minus <a>IPD</a>, otherwise.</li>
+        <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
       <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and sequences of
