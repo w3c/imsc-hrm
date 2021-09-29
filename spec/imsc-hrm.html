@@ -221,8 +221,6 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <p><dfn>IMSC Document Instance</dfn>. <a>Document Instance</a> that conform to any profile defined in any edition of
     [[!imsc]].</p>
 
-    <p><dfn>effective content profile</dfn>. See Section 2.2 at [[!ttml2]].</p>
-
     <p><dfn>Intermediate Synchronic Document</dfn>. See Section 9.3.2 at [[!ttml2]].</p>
     <p><dfn>Root Container Region</dfn>. See Section 2.2 at [[!ttml2]].</p>
 
@@ -530,8 +528,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <h2>Paint Text</h2>
 
       <p>In the context of this section, a <dfn>glyph</dfn> is a tuple consisting of (i) one character and (ii) the computed values
-      of the following style properties, excluding those properties that are associated with a Feature or Extension that is
-      designated as <em>prohibited</em> in the <a>effective content profile</a> of the <a>IMSC Document Instance</a>:</p>
+      of the following style properties:</p>
 
       <ul>
         <li><code>tts:color</code></li>
@@ -550,6 +547,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
         <li><code>tts:textShadow</code></li>
       </ul>
+
+      <p class='note'>In the case where a property is <em>prohibited</em> in a profile of IMSC, the computed value of the property
+      specified in [[ttml2]] can be used.</p>
 
       <p class='note'>While one-to-one mapping between characters and typographical glyphs is generally the rule in some scripts,
       e.g. latin script, it is the exception in others. For instance, in arabic script, a character can yield multiple glyphs
