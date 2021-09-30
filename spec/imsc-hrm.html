@@ -301,8 +301,20 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
-      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and sequences of
-        <a>empty ISDs</a> are handled as a single ISD.</p>
+      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and treats sequences of
+        <a>empty ISDs</a> as a single ISD.</p>
+
+      <figure id='fig-rendering-presentation-time'>
+        <img src="figures/isd-rendering-time-fig.png" alt="ISD rendering and presentation times.">
+
+        <figcaption>
+          illustrates the rendering and presentation of <a>intermediate synchronic documents</a> by the Presentation Compositor. The
+          Presentation Compositor renders E<sub>n</sub> at the presentation time of E<sub>n-2</sub> since E<sub>n-1</sub> is an
+          <a>empty ISD</a>. In contrast, the Presentation Compositor renders E<sub>n-2</sub> at the presentation time of
+          E<sub>n-3</sub> since E<sub>n-4</sub> is not an <a>empty ISD</a>. Finally, E<sub>0</sub> is rendered at the presentation
+          time of E<sub>0</sub> minus IPD.
+        </figcaption>
+      </figure>
 
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>intermediate synchronic document</a> E<sub>n</sub> in the Presentation
       Buffer P<sub>n</sub> SHALL be:</p>
