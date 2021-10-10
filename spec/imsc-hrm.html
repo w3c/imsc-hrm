@@ -229,6 +229,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p><dfn>presented region</dfn>. See [[!imsc]].</p>
 
       <p><dfn>presented image</dfn>. See [[!imsc]].</p>
+      
+      <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with no <a>presented region</a>.</p>
   </section>
 
   <section id="conformance">
@@ -280,9 +282,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       document</a> E<sub>n</sub> using the following steps in order:</p>
 
       <ol>
-        <li>clear the pixels, except for the first <a>intermediate synchronic document</a> E<sub>0</sub> for the which the pixels
-        of P<sub>0</sub> SHALL be assumed to have been cleared;
-        </li>
+        <li>clear the pixels of the entire <a>Root Container Region</a>, unless n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>;</li>
 
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
@@ -294,10 +294,27 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
-        <li>at the presentation time of E<sub>0</sub> minus Initial Painting Delay (IPD), if n = 0; or</li>
-
-        <li>at the presentation time of E<sub>n-1</sub>, if n &gt; 0.</li>
+        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m-1</sub>
+        is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or
+      </li>
+        
+        <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
+
+      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and treats sequences of
+        <a>empty ISDs</a> as a single ISD.</p>
+
+      <figure id='fig-rendering-presentation-time'>
+        <img src="figures/isd-rendering-time-fig.png" alt="ISD rendering and presentation times.">
+
+        <figcaption>
+          illustrates the rendering and presentation of <a>intermediate synchronic documents</a> by the Presentation Compositor. The
+          Presentation Compositor renders E<sub>n</sub> at the presentation time of E<sub>n-2</sub> since E<sub>n-1</sub> is an
+          <a>empty ISD</a>. In contrast, the Presentation Compositor renders E<sub>n-2</sub> at the presentation time of
+          E<sub>n-3</sub> since E<sub>n-4</sub> is not an <a>empty ISD</a>. Finally, E<sub>0</sub> is rendered at the presentation
+          time of E<sub>0</sub> minus IPD.
+        </figcaption>
+      </figure>
 
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>intermediate synchronic document</a> E<sub>n</sub> in the Presentation
       Buffer P<sub>n</sub> SHALL be:</p>
@@ -334,7 +351,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>It SHALL be an error for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
       presentation time of E<sub>n</sub>.</p>
 
-      <p>Unless specified otherwise, the following table SHALL specify values for IPD and BDraw.</p>
+      <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
 
       <table class='simple'>
         <thead>
@@ -347,7 +364,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
         <tbody>
           <tr>
-            <td>Initial Painting Delay (IPD)</td>
+            <td><dfn data-lt="IPD">Initial Painting Delay</dfn> (IPD)</td>
 
             <td>1 s</td>
           </tr>
@@ -364,7 +381,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Region</a> is ultimately rendered at 1920×1080 resolution, a BDraw of 12 s<sup>-1</sup> would correspond to a fill rate of
       1920×1080×12/s=23.7×2<sup>20</sup>pixels s<sup>-1</sup>.</p>
 
-      <p class='note'>IPD effectively sets a limit on the complexity of any given <a>intermediate synchronic document</a>.</p>
+      <p class='note'><a>IPD</a> effectively sets a limit on the complexity of any given <a>intermediate synchronic document</a>.</p>
     </section>
 
     <section id='paint-regions'>
@@ -374,8 +391,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>0</sub>) = 0 and CLEAR(E<sub>n | n &gt; 0</sub>) = 1, i.e. the <a>Root Container Region</a> in its
-      entirety.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 0 if n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>, and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
 
       <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>intermediate synchronic document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
