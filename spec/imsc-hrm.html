@@ -120,7 +120,7 @@ var respecConfig = {
                             "id":"ttml1-20181108",
                             "date":"8 November 2018"
                           },
-                          "IMSC": {
+                          "imsc": {
                             publisher: "World Wide Web Consortium (W3C)",
                             href :"https://www.w3.org/TR/ttml-imsc/",
                             title: "TTML Profiles for Internet Media Subtitles and Captions"
@@ -189,7 +189,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 <body>
   <section id='abstract'>
     <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the
-   complexity of [[IMSC]] <a>Document Instances</a>.</p>
+   complexity of an <a>IMSC Document Instance</a>.</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
     model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
@@ -203,8 +203,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of [[IMSC]] <a>Document
-    Instances</a>.</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of a <a>IMSC Document
+    Instance</a>.</p>
   </section>
 
   <section id='conventions'>
@@ -217,6 +217,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section id='terms'>
     <h2>Terms and Definitions</h2>
     <p><dfn data-lt="Document Instance|Document Instances">Document Instance</dfn>. See Section 2.2 at [[!ttml2]].</p>
+
+    <p><dfn>IMSC Document Instance</dfn>. A <a>Document Instance</a> that conforms to any profile defined in any edition of
+    [[!imsc]].</p>
 
     <p><dfn>Intermediate Synchronic Document</dfn>. See Section 9.3.2 at [[!ttml2]].</p>
     <p><dfn>Root Container Region</dfn>. See Section 2.2 at [[!ttml2]].</p>
@@ -234,8 +237,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   </section>
 
   <section id="conformance">
-    A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
-    is processed without error as defined in <a href="#hypothetical-render-model-general"></a>.
+    <p>
+      Unless noted otherwise, this specification applies to an <a>IMSC Document Instance</a>.
+    </p>
+    <p>
+      A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
+      is processed without error as defined in <a href="#hypothetical-render-model-general"></a>.
+    </p>
   </section>
 
 
@@ -250,11 +258,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </figcaption>
       </figure>
 
-      <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive <a data-lt="intermediate synchronic document">intermediate synchronic documents</a>
-      obtained from an input <a>Document Instance</a>, and uses a simple double buffering model: while an <a>intermediate
-      synchronic document</a> E<sub>n</sub> is being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the
-      model), the previous <a>intermediate synchronic document</a> E<sub>n-1</sub> is available for display in Presentation Buffer
-      P<sub>n-1</sub> (the "back buffer" of the model).</p>
+      <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive
+      <a data-lt="intermediate synchronic document">intermediate synchronic documents</a> obtained from an input <a>IMSC Document
+      Instance</a>, and uses a simple double buffering model: while an <a>intermediate synchronic document</a> E<sub>n</sub> is
+      being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the model), the previous <a>intermediate
+      synchronic document</a> E<sub>n-1</sub> is available for display in Presentation Buffer P<sub>n-1</sub> (the "back buffer" of
+      the model).</p>
 
       <p>The model specifies an (hypothetical) time required for completely painting an <a>intermediate synchronic document</a> as
       a proxy for complexity. Painting includes drawing region backgrounds, rendering and copying glyphs, and decoding and copying
@@ -554,6 +563,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
         <li><code>tts:textShadow</code></li>
       </ul>
+
+      <p class='note'>In the case where a property is <em>prohibited</em> in a profile of IMSC, the computed value of the property
+      specified in [[ttml2]] can be used.</p>
 
       <p class='note'>While one-to-one mapping between characters and typographical glyphs is generally the rule in some scripts,
       e.g. latin script, it is the exception in others. For instance, in arabic script, a character can yield multiple glyphs
