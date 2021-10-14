@@ -433,13 +433,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>the opacity of the computed value of <code>tts:backgroundColor</code> is not <code>0</code>.</li>
       </ul>
 
-      <p class="ednote"><a href="https://github.com/w3c/imsc-hrm/issues/5">https://github.com/w3c/imsc-hrm/issues/5</a> discusses
-      whether <code>span</code> elements should be removed from the NBG(R<sub>i</sub>) calculation and/or whether <code>BDraw</code>
-      should be increased: the complexity of drawing the background of a <code>span</code> element is currently equal to drawing the
-      background of the parent region, even as the size of the text within the <code>span</code> element is much smaller than the
-      size of the parent region. This impacts <a>IMSC Document Instances</a> that follow the common practice of using
-      <code>span</code> elements to display light text on a dark background in a parent region that fills most of the <a>Root
-      Container Region</a>.</p>
+      <p class="issue" data-number="5"></p>
 
       <p class="note">An element and its parent that satisfy the criteria above and share identical computed values of
       <code>tts:backgroundColor</code> are counted as two distinct elements for the purpose of computing NBG(R<sub>i</sub>).</p>
