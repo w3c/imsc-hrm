@@ -728,7 +728,26 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section class="appendix informative">
     <h2>Privacy and Security Considerations</h2>
-
+    <p>This specification has no inherent security or privacy implications.</p>
+    <p>The algorithm defined within this specification is used for static analysis of a resource.
+      This specification does not define any protocol or interface for obtaining such a resource,
+      and it does not define any interface for exposing the results of the analysis.
+      No personal or sensitive information is processed as part of the algorithm,
+      other than any such information that might happen to be part of the IMSC document being analysed.
+      No information is exposed by the algorithm to any origin.
+      No scripts are loaded or processed as part of the algorithm
+      and no links to external resources are dereferenced.
+    </p>
+    <section>
+      <h3>Implementation considerations</h3>
+      <p>Implementers of this specification should capture and meet privacy and security requirements for their intended application.
+        For example, an implementation could, when reporting on an error encountered during processing of an IMSC document,
+        include a section of the content of an IMSC document to elaborate the error.
+        If that content could include sensitive or personal information,
+        the implementation should ensure that any such output is provided using appropriately secure protocols.
+        No such reporting is defined or required by this specification.
+      </p>
+    </section>
   </section>
 
   <section id="substantive-changes-summary" class="appendix informative">
