@@ -1,6 +1,6 @@
 # IMSC Hypothetical Render Model (HRM)
 
-* Status: [First Public Working Draft](https://www.w3.org/TR/2021/WD-imsc-hrm-20211109/)
+* Latest published version: [https://www.w3.org/TR/imsc-hrm/](https://www.w3.org/TR/imsc-hrm/)
 * Participate: [Timed Text Working Group](https://www.w3.org/groups/wg/timed-text)
 * Issue Tracker: https://github.com/w3c/imsc-hrm/
 
