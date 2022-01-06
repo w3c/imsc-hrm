@@ -244,6 +244,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       A sequence of consecutive <a>intermediate synchronic documents</a> conforms to the Hypothetical Render Model if
       is processed without error as defined in <a href="#hypothetical-render-model-general"></a>.
     </p>
+    <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
+    Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
   </section>
 
 
@@ -719,12 +721,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         rendered every second.
       </aside>
     </section>
-
   
-  <section class="appendix informative">
-    <h2>Acknowledgements</h2>
-
-  </section>
+    <section class="appendix informative">
+      <h2>Accessibility Considerations</h2>
+        <p>In a system where <a>IMSC Document Instances</a> are expected to conform to the Hypothetical Render Model, an <a>IMSC
+        Document Instance</a> that does not conform to the Hypothetical Render Model might negatively impact accessibility
+        during presentation of the <a>IMSC Document Instance</a> and its associated content.</p>
+    </section>
 
   <section class="appendix informative">
     <h2>Privacy and Security Considerations</h2>
@@ -751,6 +754,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         No such reporting is defined or required by this specification.
       </p>
     </section>
+  </section>
+
+  <section class="appendix informative">
+    <h2>Acknowledgements</h2>
+
   </section>
 
   <section id="substantive-changes-summary" class="appendix informative">
