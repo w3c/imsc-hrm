@@ -559,11 +559,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class='note'>In the case where a property is <em>prohibited</em> in a profile of [[IMSC]], the computed value of the property
       specified in [[ttml2]] can be used.</p>
 
-      <p class='note'>While one-to-one mapping between code points and glyphs (as defined in [[i18n-glossary]])
+      <p class='note'>While one-to-one mapping between [=code points=] and glyphs (as defined in [[i18n-glossary]])
         is common in some scripts (such as the Latin script), the actual relationship is often more complex.
         Some scripts, such as Arabic, use different glyphs for a given code point depending on its position in a word.
         Some scripts require combining marks or use a sequence of code points to form a glyph.
-        Cases exist where a group of code points (graphemes) results in multiple glyphs.
+        Cases exist where a group of code points ([=graphemes=]) results in multiple glyphs.
         The Hypothetical Render Model assumes that code points have a one-to-one mapping to a glyph,
         but accounts for the above complexity by reducing the performance of the glyph buffer
         for scripts where a one-to-one mapping is not the general rule (see GCpy below).</p>
@@ -691,14 +691,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>The choice of font by the presentation processor can increase rendering complexity. For instance, a cursive
-      font can generally result in a given grapheme yielding different typographical glyphs depending on context,
-      even if latin script is used.</p>
+      <p class='note'>The choice of font by the presentation processor can increase rendering complexity.
+        For instance, a cursive font might select different glyphs for a given [=code point=]
+        (in order to maintain joining or for the start/end of the word) even in the Latin script.</p>
 
       <aside class='example'>
         Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
         "glyph">glyphs</a> present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
-        maximum Normalized Glyph Buffer Size of 1 and the default tts:fontSize of 1c are used, the font size relative to the
+        maximum Normalized Glyph Buffer Size of 1 and the default <code>tts:fontSize</code> of <code>1c</code> are used,
+        the font size relative to the
         <a>Root Container Region</a> height is 1/15 , and the maximum number of distinct glyphs that can be buffered is
         1÷(1÷15)<sup>2</sup>=225 glyphs.
       </aside>
@@ -707,7 +708,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         GCpy effectively sets a limit on animating text. For example, assuming that the <a>Root Container Region</a> is ultimately
         rendered at 1920×1080 resolution and no regions need to have background color painted (so only a CLEAR(E<sub>n</sub>)
         operation is required for the normalized drawing area for the <a>Intermediate Synchronic Document</a>), a GCpy and BDraw of
-        12 s<sup>-1</sup> would mean that a group of 160 <a data-lt="glyph">glyphs</a> with a tts:fontSize equal to 5% of the
+        12 s<sup>-1</sup> would mean that a group of 160 <a data-lt="glyph">glyphs</a> with a <code>tts:fontSize</code> equal to 5% of the
         <a>Root Container Region</a> height could be moved at most approximately 12 s<sup>-1</sup> ÷ (1 + ( 160 ×
         0.05<sup>2</sup> )) = 8.6 times per second.
       </aside>
