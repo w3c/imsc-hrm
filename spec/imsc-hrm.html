@@ -220,8 +220,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to any profile defined in any edition of
       [[!IMSC]].</p>
       
-      <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with no <dfn
+      <p><dfn>empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with no <dfn
       data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+
+      <p><dfn>error</dfn>. A failure to conform to the constraints defined by this specification.</p>
   </section>
 
   <section id="conformance">
@@ -230,7 +232,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </p>
     <p>
       A sequence of consecutive <dfn data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Documents</dfn>
-      conforms to the Hypothetical Render Model if is processed without error as defined in <a
+      conforms to the Hypothetical Render Model if is processed without <a>error</a> as defined in <a
       href="#hypothetical-render-model-general"></a>.
     </p>
     <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
@@ -350,7 +352,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       if Presentation Buffer P<sub>n</sub> is copied twice to Presentation Buffer P<sub>n-1</sub> between two consecutive video
       frame boundaries of the <a>Related Video Object</a>.</p>
 
-      <p>It SHALL be an error for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
+      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
       presentation time of E<sub>n</sub>.</p>
 
       <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
@@ -622,7 +624,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The contents of the Glyph Buffer G<sub>n</sub> SHALL be copied instantaneously to Glyph Buffer G<sub>n-1</sub> at the
       presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>It SHALL be an error for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
+      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
       to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
 
       <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
@@ -738,7 +740,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section>
       <h3>Implementation considerations</h3>
       <p>Implementers of this specification should capture and meet privacy and security requirements for their intended application.
-        For example, an implementation could, when reporting on an error encountered during processing of an <a>IMSC Document Instance</a>,
+        For example, an implementation could, when reporting on an <a>error</a> encountered during processing of an <a>IMSC Document Instance</a>,
         include a section of the content of an <a>IMSC Document Instance</a> to elaborate the error.
         If that content could include sensitive or personal information,
         the implementation should ensure that any such output is provided using appropriately secure protocols.
@@ -747,6 +749,24 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </section>
   </section>
 
+  <section class="appendix informative">
+    <h2>Error Reporting and Exception Handling</h2>
+    <section>
+      <h3>Error Reporting</h3>
+      <p>This specification does not define how, or even if, <a>errors</a> should be reported.</p>
+      <p>For example, an implementation could stop on the first error encountered,
+        or continue to process the <a>IMSC Document Instance</a>
+        and report every error.
+        Or an implementation could exit with an appropriate status code
+        without reporting any details at all.
+      </p>
+    </section>
+    <section>
+      <h3>Exception Handling</h3>
+      <p>This specification does not define any runtime exceptions,
+        or how such exceptions should be handled.</p>
+    </section>
+  </section>
   <section class="appendix informative">
     <h2>Acknowledgements</h2>
 
