@@ -243,10 +243,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section>
       <h3>Objective</h3>
   
-      <p>The objecive of the HRM is to allow subtitle and caption authors
+      <p>The objective of the HRM is to allow subtitle and caption authors
         and providers to verify that the content they provide does not exceed
         defined complexity levels, so that playback systems can render the content
-        synchronised with the author-specified display times.</p>
+        synchronized with the author-specified display times.</p>
   
       <p>Playback systems include desktop computers, mobile devices and
         home-theatres devices.</p>
@@ -265,31 +265,44 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   
       <ul>
         <li>an <a>IMSC Document Instance</a> authored by a first party will
-          exceed the capabilities of the renderer of a second party, resulting in
-          an incomplete presentation;</li>
+        exceed the capabilities of the <a>presentation processor</a> of a second
+        party, resulting in an incomplete presentation;</li>
   
         <li>a first party authors only extremely simple <a>IMSC Document
             Instance</a> in an attempt to ensure a complete presentation across all
           renderers, resulting in a lower quality presentation;</li>
   
-        <li>a first party over-provisions their renderer in order to ensure a
-          complete presentation of all <a>IMSC Document Instance</a>, resulting in
-          additional complexity or fewer resources available to other processes;
-          or</li>
+        <li>a first party over-provisions their <a>presentation processor</a> in
+        order to ensure a complete presentation of all <a>IMSC Document
+        Instance</a>, resulting in additional complexity or fewer resources
+        available to other processes; or</li>
   
-        <li>one renderer becomes the de-facto reference to determine whether the
-        presentation of a <a>IMSC Document Instance</a> will succeed, at the
-        expense of other renderers and consitency of presentation.</li>
+        <li>one <a>presentation processor</a> becomes the de-facto reference to
+        determine whether the presentation of a <a>IMSC Document Instance</a>
+        will succeed, at the expense of other renderers and consistency of
+        presentation.</li>
       </ul>
 
-      <p>By defining a method to compute the complexity of an <a>IMSC Document
-      Instance</a> and specifying a maximum complexity according to that method:</p>
+      <figure id='fig-intro'>
+        <img src="figures/intro-fig-1.svg" alt="The HRM prevents incomplete presentations of IMSC Instance Documents.">
+
+        <figcaption>
+          The HRM allows authors and implementers of <a>presentation
+          processors</a> to agree on the maximum complexity of <a>IMSC Document
+          Instances</a>.
+        </figcaption>
+      </figure>
+
+      <p>As illustrated in <a href="#fig-intro"></a>, by defining a method (the
+      HRM) to compute the complexity of an <a>IMSC Document Instance</a> and
+      specifying a maximum <a>IMSC Document Instance</a> complexity according to
+      that method:</p>
 
       <ul>
         <li>authors can ensure that their <a>IMSC Document Instances</a> do not
         exceed this maximum complexity;</li>
   
-        <li>implementer can design their renderer can render all <a>IMSC
+        <li>implementer can design their presentation processor can render all <a>IMSC
         Document Instances</a> that do not exceed this maximum complexity.</li>
       </ul>
 
@@ -370,7 +383,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </section>
   </section>
 
-    <section class="informative">
+    <section class="informative" id="sec-architecture">
       <h2>Architecture</h2>
 
       <figure id='fig-hypothetical-render-model'>
@@ -816,9 +829,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>The choice of font by the presentation processor can increase rendering complexity. For instance, a cursive
-      font can generally result in a given character yielding different typographical glyphs depending on context, even if latin
-      script is used.</p>
+      <p class='note'>The choice of font by the <dfn
+      data-cite="ttml2#terms-presentation processor">presentation
+      processor</dfn> can increase rendering complexity. For instance, a cursive
+      font can generally result in a given character yielding different
+      typographical glyphs depending on context, even if latin script is
+      used.</p>
 
       <aside class='example'>
         Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
