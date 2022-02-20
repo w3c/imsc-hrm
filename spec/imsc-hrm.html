@@ -237,9 +237,141 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
   </section>
 
+  <section class="informative">
+    <h2>Introduction</h2>
+  
+    <section>
+      <h3>Objective</h3>
+  
+      <p>The objecive of the HRM is to allow subtitle and caption authors
+        and providers to verify that the content they provide does not exceed
+        defined complexity levels, so that playback systems can render the content
+        synchronised with the author-specified display times.</p>
+  
+      <p>Playback systems include desktop computers, mobile devices and
+        home-theatres devices.</p>
+
+      <p class="note">The HRM is not a new concept: it has been included in all
+      versions and editions of [[IMSC]] and has remained substantially
+      unchanged. It is refactored herein to simplify document maintenance.</p>
+    </section>
+  
+    <section>
+      <h3>Why limit the complexity of <a>IMSC Document Instances</a>?</h3>
+  
+      <p><a>IMSC Document Instances</a> are typically authored by one party and
+        rendered by another. Unless both parties agree on the maximum complexity
+        of a <a>IMSC Document Instance</a>, it is likely that:</p>
+  
+      <ul>
+        <li>an <a>IMSC Document Instance</a> authored by a first party will
+          exceed the capabilities of the renderer of a second party, resulting in
+          an incomplete presentation;</li>
+  
+        <li>a first party authors only extremely simple <a>IMSC Document
+            Instance</a> in an attempt to ensure a complete presentation across all
+          renderers, resulting in a lower quality presentation;</li>
+  
+        <li>a first party over-provisions their renderer in order to ensure a
+          complete presentation of all <a>IMSC Document Instance</a>, resulting in
+          additional complexity or fewer resources available to other processes;
+          or</li>
+  
+        <li>one renderer becomes the de-facto reference to determine whether the
+        presentation of a <a>IMSC Document Instance</a> will succeed, at the
+        expense of other renderers and consitency of presentation.</li>
+      </ul>
+
+      <p>By defining a method to compute the complexity of an <a>IMSC Document
+      Instance</a> and specifying a maximum complexity according to that method:</p>
+
+      <ul>
+        <li>authors can ensure that their <a>IMSC Document Instances</a> do not
+        exceed this maximum complexity;</li>
+  
+        <li>implementer can design their renderer can render all <a>IMSC
+        Document Instances</a> that do not exceed this maximum complexity.</li>
+      </ul>
+
+    </section>
+  
+    <section>
+      <h3>Why is the HRM needed to limit complexity?</h3>
+
+      <p>The HRM supplements the syntactic and structural constraints imposed in
+      [[IMSC]] by imposing constraints on the contents of the presentation.</p>
+  
+      <p>Because of the temporal and spatial variability of subtitles and
+        captions across types of content, territories and languages, it is not
+        possible to limit the complexity of an <a>IMSC Document Instance</a> using
+        only average values.</p>
+  
+      <p class="example">A constraint of 840 characters per minute would
+        allow a subtitle to contain 840 characters, as long it was the only one
+        within a 60 second window.</p>
+  
+      <p>The HRM achieves a more accurate representation of the complexity of an
+        <a>IMSC Document Instance</a> at any given time by taking into account
+        its past complexity in addition to its instantaneous complexity. The
+        same approach is commonly used in video to limit bitstream complexity,
+        e.g., the Hypothetical Reference Decoder (HRD) specified in
+        [[iso14496-10]].
+      </p>
+    </section>
+  
+    <section>
+      <h3>How does the HRM measures complexity?</h3>
+  
+      <p>
+        The HRM defines an (hypothetical) time required for painting subtitles
+        and captions. Painting includes drawing region backgrounds, rendering
+        and copying text, and decoding and copying images. Complexity is then
+        limited by requiring that the time to paint a subtitle/caption is
+        shorter than the time elapsed since the previous subtitle/caption.
+      </p>
+  
+      <p>The calculation of the time required for painting subtitles and
+      captions is based on a static analysis of the <a>IMSC Document
+      Instances</a> and requires no fetching of external resources or actual
+      rendering. It however assumes that some characters are faster to render
+      than others, based on whether they were previously rendered and on the
+      kind of glyph they generate.<p>
+        
+      <p>The HRM is not intended as an accurate calculation of rendering time,
+      but is intended to scale with actual rendering times: a document that is
+      twice as complex according to the HRM would require roughly twice as many
+      resources to actually render.
+      </p>
+    </section>
+  
+    <section>
+      <h3>Where is the HRM used?</h3>
+  
+      <p>The HRM is typically used prior to distribution of the <a>IMSC Document
+      Instance</a> to end-user, as an integral part of authoring and as a
+      quality check before distribution.</p>
+  
+      <p>The consequences of an <a>IMSC Document Instance</a> exceeding the HRM
+      limits will depend on the circumstances:</p>
+  
+      <ul>
+        <li>an authoring system might, for example, flag the specific point in
+        time where the HRM limts were exceeded;</li>
+        <li>the ingest component of a streaming platform might outright reject
+        the <a>IMSC Document Instance</a>.</li>
+      </ul>
+  
+      <p>The HRM is not intended to be used when the <a>IMSC Document
+      Instance</a> is presented to the typical end-user, e.g. by a user-agent,
+      since end-users are not concerned with a complexity measure,
+      just as they are not concerned with video bit-rate, but instead with
+      whether the presentation is succesful.</p>
+  
+    </section>
+  </section>
 
     <section class="informative">
-      <h2>Overview</h2>
+      <h2>Architecture</h2>
 
       <figure id='fig-hypothetical-render-model'>
         <img src="figures/hypothetical-render-figure-1.png" alt="Hypothetical Render Model">
