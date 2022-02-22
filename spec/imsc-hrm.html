@@ -216,15 +216,18 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='terms'>
     <h2>Terms and Definitions</h2>
-      <p><dfn>IMSC Document Instance</dfn>. A <dfn data-lt="Document Instance|Document Instances"
-      data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to any profile defined in any edition of
-      [[!IMSC]].</p>
-      
-      <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with no <dfn
-      data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+    
+    <p><dfn>character</dfn>. The character code property of a <dfn data-cite="ttml2#terms-character-information-item">Character Information Item</dfn>.</p>
 
-      <p class="note">Where terms used are not otherwise defined, and are glossed in [[i18n-glossary]],
-        the definitions provided therein can be used.</p>
+    <p class="note">The term <a>character</a> is for practical purposes
+      the same as a [=code point=].</p>
+
+    <p><dfn data-lt="code point|code points">code point</dfn>. As defined by [[i18n-glossary]].</p>
+
+    <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with no <dfn data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+
+    <p><dfn>IMSC Document Instance</dfn>. A <dfn data-lt="Document Instance|Document Instances" data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to any profile defined in any edition of
+    [[!IMSC]].</p>
   </section>
 
   <section id="conformance">
@@ -535,7 +538,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-text'>
       <h2>Paint Text</h2>
 
-      <p>In the context of this section, a <dfn>glyph</dfn> is a tuple consisting of (i) one [[UNICODE]] code point and (ii) the computed values
+      <p>In the context of this section, a <dfn>glyph</dfn> is a tuple consisting of (i) one <a>character</a> and (ii) the computed values
       of the following style properties:</p>
 
       <ul>
@@ -559,16 +562,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class='note'>In the case where a property is <em>prohibited</em> in a profile of [[IMSC]], the computed value of the property
       specified in [[ttml2]] can be used.</p>
 
-      <p class='note'>While one-to-one mapping between [=code points=] and glyphs (as defined in [[i18n-glossary]])
-        is common in some scripts (such as the Latin script), the actual relationship is often more complex.
-        Some scripts, such as Arabic, use different glyphs for a given code point depending on its position in a word.
-        Some scripts require combining marks or use a sequence of code points to form a glyph.
-        Cases exist where a given sequence of code points can have different glyph representations depending on context.
-        The Hypothetical Render Model assumes that code points have a one-to-one mapping to a glyph,
-        but accounts for the above complexity by reducing the performance of the glyph buffer
-        for scripts where a one-to-one mapping is not the general rule (see GCpy below).</p>
+      <p class='note'>While one-to-one mapping between <a>characters</a> (<a>code points</a>) and glyphs (as defined in [[i18n-glossary]])
+      is common in some scripts (such as the Latin script), the actual relationship is often more complex.
+      Some scripts, such as Arabic, use different glyphs for a given code point depending on its position in a word.
+      Some scripts require combining marks or use a sequence of code points to form a glyph.
+      Cases exist where a given sequence of code points can have different glyph representations depending on context.
+      The Hypothetical Render Model assumes that code points have a one-to-one mapping to a glyph,
+      but accounts for the above complexity by reducing the performance of the glyph buffer
+      for scripts where a one-to-one mapping is not the general rule (see GCpy below).</p>
 
-      <p>For each <a>glyph</a> associated with a code point in a <a>presented region</a> of <a>Intermediate Synchronic Document</a>
+      <p>For each <a>glyph</a> associated with a <a>character</a> in a <a>presented region</a> of <a>Intermediate Synchronic Document</a>
       E<sub>n</sub>, the Presentation Compositor SHALL:</p>
 
       <ul>
