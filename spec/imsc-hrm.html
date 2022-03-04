@@ -715,9 +715,24 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   
     <section class="appendix informative">
       <h2>Accessibility Considerations</h2>
+      <section>
+        <h3>Impact of non-conformance</h3>
         <p>In a system where <a>IMSC Document Instances</a> are expected to conform to the Hypothetical Render Model, an <a>IMSC
-        Document Instance</a> that does not conform to the Hypothetical Render Model might negatively impact accessibility
-        during presentation of the <a>IMSC Document Instance</a> and its associated content.</p>
+          Document Instance</a> that does not conform to the Hypothetical Render Model might negatively impact accessibility
+          during presentation of the <a>IMSC Document Instance</a> and its associated content.</p>
+      </section>
+      <section>
+        <h3>User customisation of presentation</h3>
+        <p>This specification does not attempt to model any additional complexity for presentation processors
+          that might arise due to the user customisation of presentation,
+          for example as described by [[media-accessibility-reqs]];
+          such user customisation is not defined by [[IMSC]].</p>
+        <p>Implementers of <dfn data-lt="Presentation Processor|Presentation Processors"
+          data-cite="ttml2#terms-presentation-processor">Presentation Processors</dfn>
+          that support user customisation of presentation should ensure that those processors are able
+          to present <a>IMSC Document Instances</a> that conform to the Hypothetical Render Model,
+          even if the customisation effectively increases the complexity of presentation.</p>
+      </section>
     </section>
 
   <section class="appendix informative">
