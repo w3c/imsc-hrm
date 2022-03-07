@@ -634,14 +634,14 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <td style="text-align: center;"><em>Script property (see Standard Annex #24 at [[!UNICODE]]) for the character of
+            <td style="text-align: center;"><em>Script property, as defined at [[!UAX24]], for the character of
             g<sub>i</sub></em></td>
 
             <td style="text-align: center;"><em>GCpy</em></td>
           </tr>
 
           <tr>
-            <td>latin, greek, cyrillic, hebrew or base</td>
+            <td><code>Latin</code>, <code>Greek</code>, <code>Cyrillic</code>, <code>Hebrew</code> or <code>Common</code></td>
 
             <td style="text-align: center;">12</td>
           </tr>
@@ -686,7 +686,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class='note'>The choice of font by the presentation processor can increase rendering complexity. For instance, a cursive
       font can generally result in a given character yielding different typographical glyphs depending on context, even if latin
-      script is used.</p>
+      script is used. Conversely the rendering of scripts that fall in the <i>any other value</i> category can in 
+      practice achieve performance comparable to, say, the <code>latin</code> script.</p>
 
       <aside class='example'>
         Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
