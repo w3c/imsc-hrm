@@ -17,7 +17,7 @@ var respecConfig = {
                     specStatus:   "WD"
                 //,   processVersion: "2018"
                 //,   previousMaturity: "PR"
-                ,   publishDate: "2021-11-09"
+                //,   publishDate: "2021-11-09"
                 //,   modificationDate: "2020-04-27"
                 //,   errata: ""
                 //,   implementationReportURI: ""
@@ -216,18 +216,23 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='terms'>
     <h2>Terms and Definitions</h2>
-    
-    <p><dfn>character</dfn>. The character code property of a <dfn data-cite="ttml2#terms-character-information-item">Character Information Item</dfn>.</p>
 
-    <p class="note">The term <a>character</a> is for practical purposes
-      the same as a <a>code point</a>.</p>
+      <p><dfn>character</dfn>. The character code property of a <dfn
+      data-cite="ttml2#terms-character-information-item">Character Information Item</dfn>.</p>
 
-    <p><dfn data-lt="code point|code points">code point</dfn>. As defined by [[i18n-glossary]].</p>
+      <p class="note">The term <a>character</a> is for practical purposes
+        the same as a <a>code point</a>.</p>
 
-    <p><dfn>empty ISD</dfn>. an <a>Intermediate Synchronic Document</a> with no <dfn data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+      <p><dfn data-lt="code point|code points">code point</dfn>. As defined by [[i18n-glossary]].</p>
 
-    <p><dfn>IMSC Document Instance</dfn>. A <dfn data-lt="Document Instance|Document Instances" data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to any profile defined in any edition of
-    [[!IMSC]].</p>
+      <p><dfn>error</dfn>. A failure to conform to the constraints defined by this specification.</p>
+
+      <p><dfn>empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with no <dfn
+      data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+
+      <p><dfn>IMSC Document Instance</dfn>. A <dfn data-lt="Document Instance|Document Instances"
+      data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to any profile defined in any edition of
+      [[!IMSC]].</p>
   </section>
 
   <section id="conformance">
@@ -236,8 +241,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </p>
     <p>
       A sequence of consecutive <dfn data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Documents</dfn>
-      conforms to the Hypothetical Render Model if is processed without error as defined in <a
-      href="#hypothetical-render-model-general"></a>.
+      conforms to the Hypothetical Render Model if is processed without <a>error</a>.
     </p>
     <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
@@ -356,7 +360,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       if Presentation Buffer P<sub>n</sub> is copied twice to Presentation Buffer P<sub>n-1</sub> between two consecutive video
       frame boundaries of the <a>Related Video Object</a>.</p>
 
-      <p>It SHALL be an error for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
+      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
       presentation time of E<sub>n</sub>.</p>
 
       <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
@@ -632,7 +636,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The contents of the Glyph Buffer G<sub>n</sub> SHALL be copied instantaneously to Glyph Buffer G<sub>n-1</sub> at the
       presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>It SHALL be an error for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
+      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
       to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
 
       <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
@@ -644,14 +648,14 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <td style="text-align: center;"><em>Script property (see Standard Annex #24 at [[!UNICODE]]) for the <a>character</a> of
+            <td style="text-align: center;"><em>Script property, as defined at [[!UAX24]], for the <a>character</a> of
             g<sub>i</sub></em></td>
 
             <td style="text-align: center;"><em>GCpy</em></td>
           </tr>
 
           <tr>
-            <td>latin, greek, cyrillic, hebrew or base</td>
+            <td><code>Latin</code>, <code>Greek</code>, <code>Cyrillic</code>, <code>Hebrew</code> or <code>Common</code></td>
 
             <td style="text-align: center;">12</td>
           </tr>
@@ -667,13 +671,14 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <td style="text-align: center;"><em>Block property (see [[!UNICODE]]) for the <a>character</a> of g<sub>i</sub></em></td>
+            <td style="text-align: center;"><em>Script property, as defined at [[!UAX24]], for the <a>character</a> of
+            g<sub>i</sub></em></td>
 
             <td style="text-align: center;"><em>Ren(G<sub>i</sub>)</em></td>
           </tr>
 
           <tr>
-            <td>CJK Unified Ideograph</td>
+            <td><code>Han</code>, <code>Katakana</code>, <code>Hiragana</code>, <code>Bopomofo</code> or <code>Hangul</code></td>
 
             <td style="text-align: center;">0.6</td>
           </tr>
@@ -695,8 +700,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </table>
 
       <p class='note'>The choice of font by the presentation processor can increase rendering complexity.
-        For instance, a cursive font might select different glyphs for a given <a data-cite="i18n-glossary/#def_grapheme">grapheme</a>
-        (in order to maintain joining or for the start/end of the word) even in the Latin script.</p>
+      For instance, a cursive font might select different glyphs for a given <a data-cite="i18n-glossary/#def_grapheme">grapheme</a>
+      (in order to maintain joining or for the start/end of the word) even in the Latin script. Conversely the rendering of scripts that fall in the <i>any other value</i> category can in 
+      practice achieve performance comparable to, say, the <code>latin</code> script.</p>
 
       <aside class='example'>
         Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
@@ -726,9 +732,24 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   
     <section class="appendix informative">
       <h2>Accessibility Considerations</h2>
+      <section>
+        <h3>Impact of non-conformance</h3>
         <p>In a system where <a>IMSC Document Instances</a> are expected to conform to the Hypothetical Render Model, an <a>IMSC
-        Document Instance</a> that does not conform to the Hypothetical Render Model might negatively impact accessibility
-        during presentation of the <a>IMSC Document Instance</a> and its associated content.</p>
+          Document Instance</a> that does not conform to the Hypothetical Render Model might negatively impact accessibility
+          during presentation of the <a>IMSC Document Instance</a> and its associated content.</p>
+      </section>
+      <section>
+        <h3>User customisation of presentation</h3>
+        <p>This specification does not attempt to model any additional complexity for presentation processors
+          that might arise due to the user customisation of presentation,
+          for example as described by [[media-accessibility-reqs]];
+          such user customisation is not defined by [[IMSC]].</p>
+        <p>Implementers of <dfn data-lt="Presentation Processor|Presentation Processors"
+          data-cite="ttml2#terms-presentation-processor">Presentation Processors</dfn>
+          that support user customisation of presentation should ensure that those processors are able
+          to present <a>IMSC Document Instances</a> that conform to the Hypothetical Render Model,
+          even if the customisation effectively increases the complexity of presentation.</p>
+      </section>
     </section>
 
   <section class="appendix informative">
@@ -749,7 +770,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section>
       <h3>Implementation considerations</h3>
       <p>Implementers of this specification should capture and meet privacy and security requirements for their intended application.
-        For example, an implementation could, when reporting on an error encountered during processing of an <a>IMSC Document Instance</a>,
+        For example, an implementation could, when reporting on an <a>error</a> encountered during processing of an <a>IMSC Document Instance</a>,
         include a section of the content of an <a>IMSC Document Instance</a> to elaborate the error.
         If that content could include sensitive or personal information,
         the implementation should ensure that any such output is provided using appropriately secure protocols.
@@ -758,6 +779,24 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </section>
   </section>
 
+  <section class="appendix informative">
+    <h2>Error Reporting and Exception Handling</h2>
+    <section>
+      <h3>Error Reporting</h3>
+      <p>This specification does not define how, or even if, <a>errors</a> should be reported.</p>
+      <p>For example, an implementation could stop on the first error encountered,
+        or continue to process the <a>IMSC Document Instance</a>
+        and report every error.
+        Or an implementation could exit with an appropriate status code
+        without reporting any details at all.
+      </p>
+    </section>
+    <section>
+      <h3>Exception Handling</h3>
+      <p>This specification does not define any runtime exceptions,
+        or how such exceptions should be handled.</p>
+    </section>
+  </section>
   <section class="appendix informative">
     <h2>Acknowledgements</h2>
 
