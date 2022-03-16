@@ -566,14 +566,18 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class='note'>In the case where a property is <em>prohibited</em> in a profile of [[IMSC]], the computed value of the property
       specified in [[ttml2]] can be used.</p>
 
-      <p class='note'>While one-to-one mapping between <a>characters</a> and glyphs (as defined in [[i18n-glossary]])
-      is common in some scripts (such as the Latin script), the actual relationship is often more complex.
-      Some scripts, such as Arabic, use different glyphs for a given <a>code point</a> depending on its position in a word.
+      <p class='note'>The Hypothetical Render Model defines a one-to-one mapping between <a>characters</a> and <a>glyphs</a>
+      (using the definition of glyph from this document).
+      While a one-to-one mapping between <a>code points</a> and glyphs (using the definition of glyph from [[i18n-glossary]])
+      is common in some scripts (such as the Latin script),
+      the actual relationship is more complex.
+      Some scripts, such as Arabic, use different glyphs for a given character,
+      depending on its position in a word.
       Some scripts require combining marks or use a sequence of code points to form a glyph.
       Cases exist where a given sequence of code points can have different glyph representations depending on context.
-      The Hypothetical Render Model assumes that code points have a one-to-one mapping to a glyph,
-      but accounts for the above complexity by reducing the performance of the glyph buffer
-      for scripts where a one-to-one mapping is not the general rule (see GCpy below).</p>
+      This complexity is accounted for by reducing the performance of the glyph buffer
+      for scripts where a one-to-one mapping is not the general rule (see GCpy below).
+      </p>
 
       <p>For each <a>glyph</a> associated with a <a>character</a> in a <a>presented region</a> of <a>Intermediate Synchronic Document</a>
       E<sub>n</sub>, the Presentation Compositor SHALL:</p>
