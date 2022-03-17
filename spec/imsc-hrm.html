@@ -333,15 +333,19 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         possible to limit the complexity of an <a>IMSC Document Instance</a> using
         only average values.</p>
   
-      <p class="example">An average-based constraint of 840 <a>characters</a> per
-      minute could be met in multiple ways, with different rendering
-      complexities. Contrast two potential approaches. In the first, 5
-      <a>characters</a> are presented for a fraction of a second, followed by 835
-      <a>characters</a> that are then presented for over 59 seconds. This generates a
-      high rendering complexity for the 835 <a>characters</a>, since there is only a
-      brief time available to paint them. In the second, 210 <a>characters</a> must be
-      painted every 15 seconds, giving 15 seconds to prepare for the next
-      presentation. This has a much lower rendering complexity.</p>
+      <div class="example">
+        <p>An average-based constraint of 840 <a>characters</a> per
+          minute could be met in multiple ways, with different rendering
+          complexities. Contrast two potential approaches:</p>
+        <p> In the first, 5
+          <a>characters</a> are presented for a fraction of a second, followed by 835
+          <a>characters</a> that are then presented for over 59 seconds. This generates a
+          high rendering complexity for the 835 <a>characters</a>, since there is only a
+          brief time available to paint them.</p>
+        <p>In the second, 210 <a>characters</a> must be
+          painted every 15 seconds, giving 15 seconds to prepare for the next
+          presentation. This has a much lower rendering complexity.</p>
+      </div>
   
       <p>The HRM achieves a more accurate representation of the complexity of an
         <a>IMSC Document Instance</a> at any given time by taking into account
