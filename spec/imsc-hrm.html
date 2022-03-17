@@ -312,7 +312,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>authors can ensure that their <a>IMSC Document Instances</a> do not
         exceed this limit;</li>
   
-        <li>implementer can design their presentation processor to maximize the
+        <li>implementer can design their <a>presentation processor</a> to maximize the
         likelihood that it will be able to render correctly all <a>IMSC Document
         Instances</a> that do not exceed this limit; and</li>
           
@@ -333,13 +333,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         possible to limit the complexity of an <a>IMSC Document Instance</a> using
         only average values.</p>
   
-      <p class="example">An average-based constraint of 840 characters per
+      <p class="example">An average-based constraint of 840 <a>characters</a> per
       minute could be met in multiple ways, with different rendering
       complexities. Contrast two potential approaches. In the first, 5
-      characters are presented for a fraction of a second, followed by 835
-      characters that are then presented for over 59 seconds. This generates a
-      high rendering complexity for the 835 characters, since there is only a
-      brief time available to paint them. In the second, 210 characters must be
+      <a>characters</a> are presented for a fraction of a second, followed by 835
+      <a>characters</a> that are then presented for over 59 seconds. This generates a
+      high rendering complexity for the 835 <a>characters</a>, since there is only a
+      brief time available to paint them. In the second, 210 <a>characters</a> must be
       painted every 15 seconds, giving 15 seconds to prepare for the next
       presentation. This has a much lower rendering complexity.</p>
   
@@ -353,27 +353,22 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </section>
   
     <section>
-      <h3>How does the HRM measure complexity?</h3>
+      <h3>How does the HRM measure and limit complexity?</h3>
   
-      <p>
-        The HRM defines an hypothetical time required for painting subtitles and
-        captions. Painting includes drawing region backgrounds, rendering and
-        copying text, and decoding and copying images. Complexity is then
-        limited by requiring that the hypothetical time to paint a
-        subtitle/caption is shorter than the time elapsed since the previous
-        subtitle/caption.
+      <p>The HRM defines a simple model for the rendering of subtitles and captions, and uses the time it takes to
+      render subtitles and captions according to that model as a proxy for the complexity of the subtitles and captions.
+      Rendering includes drawing region backgrounds, rendering and copying text, and decoding and copying images.
+      Complexity is then limited by requiring that the time to render one subtitle or caption is shorter than the time
+      elapsed since the previous subtitle or caption.
       </p>
   
-      <p>The hypothetical time required for painting subtitles and captions is
-      based on a static analysis of the <a>IMSC Document Instance</a> and
-      requires no fetching of external resources or actual rendering. It assumes
-      that some characters are faster to render than others, based on whether
-      they were previously rendered and on the kind of glyph they generate.<p>
-        
-      <p>The hypothetical time is not intended to capture the absolute time that
-      implementation takes to paint subtitles and captions, but rather scale
-      with it: a document that is twice as complex according to the HRM would
-      require roughly twice as many resources to actually render.</p>
+      <p>The simple model requires only a static analysis of the <a>IMSC Document Instance</a>, requires no fetching of
+      external resources and does not require the <a>IMSC Document Instance</a> to be actually rendered. Several
+      simplifying assumptions are made to achieve this. For example, the model assumes that each <a>character</a> is
+      drawn independently, and accounts for that assumption being, in many cases, false, by assigning different render
+      speeds for different scripts. In general the model is not intended to capture the actual time that an
+      implementation takes to render subtitles and captions, but rather scale with it: a document that is twice as
+      complex according to the model would require roughly twice as many resources to actually render. </p>
     </section>
   
     <section>
@@ -906,12 +901,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </section>
       <section>
         <h3>User customisation of presentation</h3>
-        <p>This specification does not attempt to model any additional complexity for presentation processors
+        <p>This specification does not attempt to model any additional complexity for <a>presentation processors</a>
           that might arise due to the user customisation of presentation,
           for example as described by [[media-accessibility-reqs]];
           such user customisation is not defined by [[IMSC]].</p>
-        <p>Implementers of <dfn data-lt="Presentation Processor|Presentation Processors"
-          data-cite="ttml2#terms-presentation-processor">Presentation Processors</dfn>
+        <p>Implementers of <a>presentation processors</a>
           that support user customisation of presentation should ensure that those processors are able
           to present <a>IMSC Document Instances</a> that conform to the Hypothetical Render Model,
           even if the customisation effectively increases the complexity of presentation.</p>
