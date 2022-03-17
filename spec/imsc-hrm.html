@@ -393,7 +393,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </ul>
   
       <p>The HRM is not intended to be used when the <a>IMSC Document
-      Instance</a> is presented, e.g. by a user-agent, to end-users since:</p>
+      Instance</a> is presented to end-users since:</p>
 
       <ul>
         <li>end-users are not concerned with a technical complexity measure,
@@ -862,11 +862,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>The choice of font by the <dfn data-cite="ttml2#terms-presentation processor">presentation
-      processor</dfn> can increase rendering complexity. For instance, a cursive font might select different glyphs for
-      a given <a data-cite="i18n-glossary#def_grapheme">grapheme</a> (in order to maintain joining or for the start/end
-      of the word) even in the <code>Latin</code> script. Conversely the rendering of scripts that fall in the <em>any
-      other value</em> category can in practice achieve performance comparable to, say, the <code>Latin</code> script.
+      <p class='note'>While DUR<sub>T</sub>(E<sub>n</sub>) is not affected, the choice of font by the <dfn
+      data-cite="ttml2#terms-presentation processor">presentation processor</dfn> can increase actual rendering
+      complexity at time of presentation. For instance, a cursive font might select different glyphs for a given <a
+      data-cite="i18n-glossary#def_grapheme">grapheme</a> (in order to maintain joining or for the start/end of the
+      word) even in the <code>Latin</code> script. Conversely the rendering of scripts that fall in the <em>any other
+      value</em> category can in practice achieve performance comparable to, say, the <code>Latin</code> script.
       </p>
 
       <aside class='example'>
