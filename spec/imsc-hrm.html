@@ -247,9 +247,167 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
   </section>
 
+  <section class="informative">
+    <h2>Introduction</h2>
+  
+    <section>
+      <h3>Objective</h3>
+  
+      <p>The objective of the HRM is to allow subtitle and caption authors
+        and providers to verify that the content they provide does not exceed
+        defined complexity levels, so that playback systems can render the content
+        synchronized with the author-specified display times.</p>
+  
+      <p>Playback systems include desktop computers, mobile devices and
+        home theatre devices.</p>
 
-    <section class="informative">
-      <h2>Overview</h2>
+      <p class="note">The HRM is not a new concept: it has been included in all
+      versions and editions of [[IMSC]] and has remained substantially
+      unchanged. It is refactored herein to simplify document maintenance.</p>
+    </section>
+  
+    <section>
+      <h3>Why limit the complexity of <a>IMSC Document Instances</a>?</h3>
+  
+      <p><a>IMSC Document Instances</a> are typically authored by a first party
+      and rendered by a second party. Unless both parties agree on the maximum
+      complexity of a <a>IMSC Document Instance</a>, it is likely that:</p>
+  
+      <ul>
+        <li>an <a>IMSC Document Instance</a> authored by a first party will
+        exceed the capabilities of the <a>presentation processor</a> of a second
+        party, resulting in an incomplete presentation where some subtitles or
+        captions might be missing or might be presented too late;</li>
+
+        <li>a first party authors only extremely simple <a>IMSC Document
+       Instances</a> in an attempt to ensure a complete presentation across all
+        renderers, resulting in a lower quality presentation;</li>
+  
+        <li>a second party over-provisions their <a>presentation processor</a>
+        in order to ensure a complete presentation of all <a>IMSC Document
+        Instances</a>, resulting in increased run-time resource usage, code
+        complexity, etc.; or</li>
+  
+        <li>one <a>presentation processor</a> becomes the de-facto reference to
+        determine whether the presentation of a <a>IMSC Document Instance</a>
+        will succeed, at the expense of other renderers and consistency of
+        presentation.</li>
+      </ul>
+
+      <figure id='fig-intro'>
+        <img src="figures/intro-fig-1.svg" alt="The HRM prevents incomplete presentations of IMSC Instance Documents.">
+
+        <figcaption>
+          The HRM allows authors and implementers of <a>presentation
+          processors</a> to agree on the maximum complexity of <a>IMSC Document
+          Instances</a>.
+        </figcaption>
+      </figure>
+
+      <p>As illustrated in <a href="#fig-intro"></a>, by defining a method (the
+      HRM) to compute a proxy for the complexity of an <a>IMSC Document
+      Instance</a> and specifying a complexity limit based on such proxy:</p>
+
+      <ul>
+        <li>authors can ensure that their <a>IMSC Document Instances</a> do not
+        exceed this limit;</li>
+  
+        <li>implementers can design their <a>presentation processors</a> to maximize the
+        likelihood that they will be able to render correctly all <a>IMSC Document
+        Instances</a> that do not exceed this limit; and</li>
+          
+        <li>audiences can expect subtitle and caption presentation to match
+        the authorial intention.</li>
+      </ul>
+
+    </section>
+  
+    <section>
+      <h3>Why is the HRM needed to limit complexity?</h3>
+
+      <p>The HRM supplements the syntactic and structural constraints imposed in
+      [[IMSC]] by imposing constraints on the contents of the presentation.</p>
+  
+      <p>Because of the temporal and spatial variability of subtitles and
+        captions across types of content, territories and languages, it is not
+        possible to limit the complexity of an <a>IMSC Document Instance</a> using
+        only average values.</p>
+  
+      <div class="example">
+        <p>An average-based constraint of 840 <a>characters</a> per
+          minute could be met in multiple ways, with different rendering
+          complexities. Contrast two potential approaches:</p>
+        <p> In the first, 5
+          <a>characters</a> are presented for a fraction of a second, followed by 835
+          <a>characters</a> that are then presented for over 59 seconds. This generates a
+          high rendering complexity for the 835 <a>characters</a>, since there is only a
+          brief time available to paint them.</p>
+        <p>In the second, 210 <a>characters</a> must be
+          painted every 15 seconds, giving 15 seconds to prepare for the next
+          presentation. This has a much lower rendering complexity.</p>
+      </div>
+  
+      <p>The HRM achieves a more accurate representation of the complexity of an
+        <a>IMSC Document Instance</a> at any given time by taking into account
+        its past complexity in addition to its instantaneous complexity. The
+        same approach is commonly used in video to limit bitstream complexity,
+        e.g., the Hypothetical Reference Decoder (HRD) specified in
+        [[iso14496-10]].
+      </p>
+    </section>
+  
+    <section>
+      <h3>How does the HRM measure and limit complexity?</h3>
+  
+      <p>The HRM defines a simple model for the rendering of subtitles and captions, and uses the time it takes to
+      render subtitles and captions according to that model as a proxy for the complexity of the subtitles and captions.
+      Rendering includes drawing region backgrounds, rendering and copying text, and decoding and copying images.
+      Complexity is then limited by requiring that the time to render one subtitle or caption is shorter than the time
+      elapsed since the previous subtitle or caption.
+      </p>
+  
+      <p>This simple model requires only a static analysis of the <a>IMSC Document Instance</a>, requires no fetching of
+      external resources and does not require the <a>IMSC Document Instance</a> to be actually rendered. Several
+      simplifying assumptions are made to achieve this. For example, the model assumes that each <a>character</a> is
+      drawn independently, and accounts for that assumption being, in many cases, false, by assigning different render
+      speeds for different scripts. In general the model is not intended to capture the actual time that an
+      implementation takes to render subtitles and captions, but rather scale with it: a document that is twice as
+      complex according to the model would require roughly twice as many resources to actually render. </p>
+    </section>
+  
+    <section>
+      <h3>Where is the HRM used?</h3>
+  
+      <p>The HRM is typically used prior to distribution of the <a>IMSC Document Instance</a> to the end-user, as an
+      integral part of authoring and as a quality check before distribution.</p>
+    
+      <p>When the HRM is used, the consequences of an <a>IMSC Document Instance</a> exceeding the HRM limits depends
+      on the context:</p>
+  
+      <ul>
+        <li>an authoring system might, for example, flag the specific point in
+        time where the HRM limits were exceeded;</li>
+        <li>the ingest component of a streaming platform might outright reject
+        the <a>IMSC Document Instance</a>.</li>
+      </ul>
+  
+      <p>The HRM is not intended to be used when the <a>IMSC Document
+      Instance</a> is presented to end-users since:</p>
+
+      <ul>
+        <li>end-users are not concerned with a technical complexity measure,
+        just as they are not concerned with video bit-rate, but instead with
+        whether the presentation is successful;</li>
+        <li>a <a>presentation processor</a> cannot generally reduce the
+        complexity of a <a>IMSC Document Instance</a> without impacting the
+        presentation.</li>
+      </ul>
+
+    </section>
+  </section>
+
+    <section class="informative" id="sec-architecture">
+      <h2>Architecture</h2>
 
       <figure id='fig-hypothetical-render-model'>
         <img src="figures/hypothetical-render-figure-1.png" alt="Hypothetical Render Model">
@@ -703,10 +861,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>The choice of font by the presentation processor can increase rendering complexity.
-      For instance, a cursive font might select different glyphs for a given <a data-cite="i18n-glossary/#def_grapheme">grapheme</a>
-      (in order to maintain joining or for the start/end of the word) even in the Latin script. Conversely the rendering of scripts that fall in the <i>any other value</i> category can in 
-      practice achieve performance comparable to, say, the <code>latin</code> script.</p>
+      <p class='note'>While DUR<sub>T</sub>(E<sub>n</sub>) is not affected, the choice of font by the <dfn
+      data-cite="ttml2#terms-presentation processor">presentation processor</dfn> can increase actual rendering
+      complexity at time of presentation. For instance, a cursive font might select different glyphs for a given <a
+      data-cite="i18n-glossary#def_grapheme">grapheme</a> (in order to maintain joining or for the start/end of the
+      word) even in the <code>Latin</code> script. Conversely the rendering of scripts that fall in the <em>any other
+      value</em> category can in practice achieve performance comparable to, say, the <code>Latin</code> script.
+      </p>
 
       <aside class='example'>
         Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
@@ -744,12 +905,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </section>
       <section>
         <h3>User customisation of presentation</h3>
-        <p>This specification does not attempt to model any additional complexity for presentation processors
+        <p>This specification does not attempt to model any additional complexity for <a>presentation processors</a>
           that might arise due to the user customisation of presentation,
           for example as described by [[media-accessibility-reqs]];
           such user customisation is not defined by [[IMSC]].</p>
-        <p>Implementers of <dfn data-lt="Presentation Processor|Presentation Processors"
-          data-cite="ttml2#terms-presentation-processor">Presentation Processors</dfn>
+        <p>Implementers of <a>presentation processors</a>
           that support user customisation of presentation should ensure that those processors are able
           to present <a>IMSC Document Instances</a> that conform to the Hypothetical Render Model,
           even if the customisation effectively increases the complexity of presentation.</p>
