@@ -419,8 +419,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive
       <a data-lt="Intermediate Synchronic Document">Intermediate Synchronic Documents</a> obtained from an input <a>IMSC Document
-      Instance</a>, and uses a simple double buffering model: while an <a>Intermediate Synchronic Document</a> E<sub>n</sub> is
-      being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the model), the previous <a>Intermediate
+      Instance</a>, and uses a simple double buffering model: while non-empty <a>Intermediate Synchronic Document</a> E<sub>n</sub> is
+      being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the model), the previous non-empty <a>Intermediate
       Synchronic Document</a> E<sub>n-1</sub> is available for display in Presentation Buffer P<sub>n-1</sub> (the "back buffer" of
       the model).</p>
 
@@ -449,40 +449,41 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <h2>General</h2>
 
       <p>The Presentation Compositor SHALL render in Presentation Buffer P<sub>n</sub> each successive <a>Intermediate Synchronic
-      Document</a> E<sub>n</sub> using the following steps in order:</p>
+      Document</a> E<sub>n</sub> that is not an <a>empty ISD</a> using the following steps in order:</p>
 
       <ol>
-        <li>clear the pixels of the entire <a>Root Container Region</a>, unless n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>;</li>
-
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
-        <li>paint all pixels for background colors associated with text or image subtitle content; and</li>
+        <li>paint all pixels for background colors associated with text or image subtitle content;</li>
 
-        <li>paint the text or image subtitle content.</li>
+        <li>paint the text or image subtitle content; and</li>
+
+        <li>clear the pixels of the entire <a>Root Container Region</a>.</li>
       </ol>
 
       <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
-        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m-1</sub>
+        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m</sub>
         is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or
       </li>
         
         <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
-      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and treats sequences of
-        <a>empty ISDs</a> as a single ISD.</p>
+      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation
+      time and effectively handles a sequence of <a>empty ISDs</a> as part of the previous ISD that is not an <a>empty
+      ISD</a>.</p>
 
       <figure id='fig-rendering-presentation-time'>
         <img src="figures/isd-rendering-time-fig.png" alt="ISD rendering and presentation times.">
 
         <figcaption>
-          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a> by the Presentation Compositor. The
-          Presentation Compositor renders E<sub>n</sub> at the presentation time of E<sub>n-2</sub> since E<sub>n-1</sub> is an
-          <a>empty ISD</a>. In contrast, the Presentation Compositor renders E<sub>n-2</sub> at the presentation time of
-          E<sub>n-3</sub> since E<sub>n-4</sub> is not an <a>empty ISD</a>. Finally, E<sub>0</sub> is rendered at the presentation
-          time of E<sub>0</sub> minus IPD.
+          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a> by the Presentation
+          Compositor. The Presentation Compositor renders E<sub>n</sub> at the presentation time of E<sub>n-3</sub>
+          since both E<sub>n-1</sub> and E<sub>n-2</sub> are <a>empty ISDs</a>. In contrast, the Presentation Compositor
+          renders E<sub>n-3</sub> at the presentation time of E<sub>n-4</sub> since E<sub>n-4</sub> is not an <a>empty
+          ISD</a>. Finally, E<sub>0</sub> is rendered at the presentation time of E<sub>0</sub> minus IPD.
         </figcaption>
       </figure>
 
@@ -561,7 +562,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 0 if n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>, and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 1.</p>
 
       <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
