@@ -452,28 +452,26 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Document</a> E<sub>n</sub> that is not an <a>empty ISD</a> using the following steps in order:</p>
 
       <ol>
+        <li>clear the pixels of the entire <a>Root Container Region</a> unless n = 0</li>
+
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
-        <li>paint all pixels for background colors associated with text or image subtitle content;</li>
+        <li>paint all pixels for background colors associated with text or image subtitle content; and</li>
 
-        <li>paint the text or image subtitle content; and</li>
-
-        <li>clear the pixels of the entire <a>Root Container Region</a>.</li>
+        <li>paint the text or image subtitle content.</li>
       </ol>
 
       <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
-        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m</sub>
-        is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or
-      </li>
-        
+        <li>at the presentation time of E<sub>m</sub>, such that E<sub>m</sub> is not an <a>empty ISD</a> and
+        m is the largest value for which 0&lt;m&lt;n, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or</li>
         <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
       <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation
-      time and effectively handles a sequence of <a>empty ISDs</a> as part of the previous ISD that is not an <a>empty
-      ISD</a>.</p>
+      time and effectively handles a sequence of <a>empty ISDs</a> as part of the previous <a>Intermediate Synchronic
+      Document</a> that is not an <a>empty ISD</a>.</p>
 
       <figure id='fig-rendering-presentation-time'>
         <img src="figures/isd-rendering-time-fig.png" alt="ISD rendering and presentation times.">
@@ -562,7 +560,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 1.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 0 if n = 0; and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
 
       <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
