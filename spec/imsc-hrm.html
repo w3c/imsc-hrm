@@ -452,7 +452,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Document</a> E<sub>n</sub> that is not an <a>empty ISD</a> using the following steps in order:</p>
 
       <ol>
-        <li>clear the pixels of the entire <a>Root Container Region</a> unless n = 0</li>
+        <li>clear the pixels of the entire <a>Root Container Region</a> unless n == 0</li>
 
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
@@ -560,7 +560,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 0 if n = 0; and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 0 if n == 0; and CLEAR(E<sub>n</sub>) == 1 otherwise.</p>
 
       <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
