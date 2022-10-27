@@ -188,13 +188,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
 <body>
   <section id='abstract'>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of documents that conform to
-    any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of
+    documents that conform to any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
     model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
     requires the implementation of such a buffer, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
     that can be used to produce text output.</p>
+
+    <p>Furthermore, the model is not intended to model readability complexity.</p>
   </section>
 
   <section id='sotd'>
@@ -203,8 +205,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of a <a>IMSC Document
-    Instance</a>.</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of a
+    <a>IMSC Document Instance</a>.</p>
   </section>
 
   <section id='conventions'>
