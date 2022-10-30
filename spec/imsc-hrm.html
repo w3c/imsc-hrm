@@ -425,19 +425,19 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <a>Intermediate Synchronic Documents</a> E<sub>i</sub> obtained from an input <a>IMSC Document Instance</a>:</p>
       <ul>
         <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
-        E<sub>n</sub> is being painted into a Front Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
-        for display in a Back Buffer; and</li>
-        <li><a>empty ISDs</a> merely disconnect the Back Buffer from the display when presented,
+        E<sub>n</sub> is being painted into a Back Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
+        for display in a Front Buffer; and</li>
+        <li><a>empty ISDs</a> merely disconnect the Front Buffer from the display when presented,
         i.e., presenting an <a>empty ISD</a> is equivalent to presenting nothing.</li>
       </ul>
 
       <p>The model specifies a (hypothetical) time required for completely painting a <a>non-empty ISD</a>
-      as a proxy for complexity. Painting includes clearing the Front Buffer, drawing region backgrounds,
+      as a proxy for complexity. Painting includes clearing the Back Buffer, drawing region backgrounds,
       rendering and copying glyphs, and decoding and copying images. Complexity is then limited by requiring that
       painting of <a>non-empty ISD</a> E<sub>n</sub> begins no earlier than the presentation time of the previous non-empty
       <a>non-empty ISD</a> E<sub>m</sub> and completes by the presentation time of E<sub>n</sub>.</p>
 
-      <p>In contrast, there is no complexity involved connecting and disconnecting the Back Buffer from the display, and
+      <p>In contrast, there is no complexity involved connecting and disconnecting the Front Buffer from the display, and
       thus no complexity associated with <a>empty ISDs</a>.</p>
 
       <p>Whenever applicable, constraints are specified relative to <dfn data-cite="ttml2#terms-root-container-region">Root
@@ -459,7 +459,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='hypothetical-render-model-general'>
       <h2>General</h2>
 
-      <p>The Presentation Compositor SHALL render in the Front Buffer each successive <a>non-empty
+      <p>The Presentation Compositor SHALL render in the Back Buffer each successive <a>non-empty
       ISD</a> E<sub>n</sub> using the following steps in order:</p>
 
       <ol>
@@ -492,15 +492,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           Presentation Compositor begins rendering E<sub>2</sub> at the presentation time of E<sub>1</sub> since
           E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the Presentation Compositor begins rendering E<sub>5</sub>
           at the presentation time of E<sub>2</sub> since both E<sub>3</sub> and E<sub>4</sub> are <a>empty ISDs</a>.
-          Furthermore, E<sub>2</sub> remains in the Back Buffer until the presentation time of E<sub>5</sub> but is not
-          presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the Back Buffer is not
+          Furthermore, E<sub>2</sub> remains in the Front Buffer until the presentation time of E<sub>5</sub> but is not
+          presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the Front Buffer is not
           available for display. Finally, the Presentation Compositor begins rendering E<sub>0</sub> at the presentation
           time of E<sub>0</sub> minus IPD since E<sub>0</sub> is the first <a>Intermediate Synchronic Document</a>.
         </figcaption>
       </figure>
 
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the
-      Front Buffer SHALL be:</p>
+      Back Buffer SHALL be:</p>
 
       <p class="equation">DUR(E<sub>n</sub>) = S(E<sub>n</sub>) / BDraw + DUR<sub>T</sub>(E<sub>n</sub>) +
       DUR<sub>I</sub>(E<sub>n</sub>)</p>
@@ -523,13 +523,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </li>
       </ul>
 
-      <p>The contents of the Front Buffer SHALL be transferred instantaneously to the Back Buffer at the presentation
+      <p>The contents of the Back Buffer SHALL be transferred instantaneously to the Front Buffer at the presentation
       time of a <a>non-empty ISD</a> E<sub>n</sub>, making the latter available for display.</p>
 
-      <p>The Back Buffer SHALL be disconnected from the display while an <a>empty ISD</a> is being presented.</p>
+      <p>The Front Buffer SHALL be disconnected from the display while an <a>empty ISD</a> is being presented.</p>
 
-      <p class='note'>It is possible for the contents of the Back Buffer to never be displayed. This can happen, for
-      example, if the Front Buffer is copied twice to Back Buffer between two consecutive video frame boundaries of the
+      <p class='note'>It is possible for the contents of the Front Buffer to never be displayed. This can happen, for
+      example, if the Back Buffer is copied twice to Front Buffer between two consecutive video frame boundaries of the
       <a>Related Video Object</a>.</p>
 
       <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
@@ -577,7 +577,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>where CLEAR(E<sub>n</sub>) = 1.</p>
 
-      <p class='note'>To ensure consistency of the Front Buffer, a new <a>Intermediate Synchronic Document</a> requires
+      <p class='note'>To ensure consistency of the Back Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
 
       <p>PAINT(E<sub>n</sub>) SHALL be the normalized area to be painted for all regions that are used in <a>Intermediate
@@ -622,28 +622,28 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-images'>
       <h2>Paint Images</h2>
 
-      <p>The Presentation Compositor SHALL paint into the Front Buffer all visible pixels of <a>presented
+      <p>The Presentation Compositor SHALL paint into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
       <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor SHALL either:</p>
 
       <ul>
         <li>if an identical image is present in Decoded Image Buffer D<sub>n</sub>, copy the image from Decoded Image Buffer
-        D<sub>n</sub> to the Front Buffer using the Image Copier; or</li>
+        D<sub>n</sub> to the Back Buffer using the Image Copier; or</li>
 
         <li>if an identical image is present in Decoded Image Buffer D<sub>n-1</sub>, i.e. an identical image was present in
         <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Image Copier the image from Decoded Image Buffer
-        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Front Buffer; or
+        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Back Buffer; or
         </li>
 
-        <li>otherwise, decode the image, using the Image Decoder, into the Front Buffer and Decoded
+        <li>otherwise, decode the image, using the Image Decoder, into the Back Buffer and Decoded
         Image Buffer D<sub>n</sub>.</li>
       </ul>
 
       <p>Two images SHALL be identical if and only if they reference the same encoded image source.</p>
 
       <p>The duration DUR<sub>I</sub>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub> in the Front Buffer SHALL be as follows:</p>
+      E<sub>n</sub> in the Back Buffer SHALL be as follows:</p>
 
       <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> NRGA(I<sub>i</sub>) / ICpy
       + ∑<sub>I<sub>j</sub> ∈ I<sub>d</sub></sub> NSIZ(I<sub>j</sub>) / IDec</p>
@@ -756,15 +756,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <ul>
         <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n</sub>, copy the <a>glyph</a> from Glyph Buffer
-        G<sub>n</sub> to the Front Buffer using the Glyph Copier; or
+        G<sub>n</sub> to the Back Buffer using the Glyph Copier; or
         </li>
 
         <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n-1</sub>, i.e. an identical <a>glyph</a> was present in
         <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Glyph Copier the <a>glyph</a> from Glyph Buffer
-        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Front Buffer; or
+        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Back Buffer; or
         </li>
 
-        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Front Buffer and Glyph Buffer
+        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Buffer
         G<sub>n</sub>.
         </li>
       </ul>
@@ -778,7 +778,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </figure>
 
       <p>The duration DUR<sub>T</sub>(E<sub>n</sub>) for rendering the text of an <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub> in the Front Buffer is as follows:</p>
+      E<sub>n</sub> in the Back Buffer is as follows:</p>
 
       <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> NRGA(g<sub>i</sub>)
       / Ren(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> NRGA(g<sub>j</sub>) / GCpy</p>
@@ -786,11 +786,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>where</p>
 
       <ul>
-        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Front Buffer
+        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Back Buffer
         using the Glyph Renderer in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
-        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Front Buffer using
+        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Back Buffer using
         the Glyph Copier in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 

@@ -76,7 +76,7 @@
 			<text x="4" y="11.68" class="st3" v:langID="1033"><v:paragraph/><v:tabList/>Once per Intermediate Synchronic Document (ISD)</text>		</g>
 		<g id="shape2-6" v:mID="2" v:groupContext="shape" v:layerMember="0" transform="translate(216.24,-153.24)">
 			<title>External Data.2</title>
-			<desc>Front Buffer</desc>
+			<desc>Back Buffer</desc>
 			<v:custProps>
 				<v:cp v:nameU="Cost" v:lbl="Cost" v:prompt="" v:type="7" v:format="@" v:sortKey="" v:invis="false" v:ask="false"
 						v:langID="1033" v:cal="0"/>
@@ -104,7 +104,7 @@
 			<v:textRect cx="31.5" cy="315.48" width="54" height="36"/>
 			<path d="M4.5 297.48 L63 297.48 A38.25 38.25 -180 0 0 63 333.48 L4.5 333.48 A38.25 38.25 0 0 1 4.5 297.48 Z"
 					class="st1"/>
-			<text x="11.71" y="317.88" class="st4" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Front Buffer</text>		</g>
+			<text x="12.89" y="317.88" class="st4" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Back Buffer</text>		</g>
 		<g id="shape3-9" v:mID="3" v:groupContext="shape" transform="translate(135.24,-153.24)">
 			<title>Sheet.3</title>
 			<desc>Presentation Compositor</desc>
@@ -225,7 +225,7 @@
 		</g>
 		<g id="shape17-68" v:mID="17" v:groupContext="shape" v:layerMember="0" transform="translate(297.24,-153.24)">
 			<title>External Data.13</title>
-			<desc>Back Buffer</desc>
+			<desc>Front Buffer</desc>
 			<v:custProps>
 				<v:cp v:nameU="Cost" v:lbl="Cost" v:prompt="" v:type="7" v:format="@" v:sortKey="" v:invis="false" v:ask="false"
 						v:langID="1033" v:cal="0"/>
@@ -253,7 +253,7 @@
 			<v:textRect cx="31.5" cy="315.48" width="54" height="36"/>
 			<path d="M4.5 297.48 L63 297.48 A38.25 38.25 -180 0 0 63 333.48 L4.5 333.48 A38.25 38.25 0 0 1 4.5 297.48 Z"
 					class="st1"/>
-			<text x="12.89" y="317.88" class="st4" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Back Buffer</text>		</g>
+			<text x="11.71" y="317.88" class="st4" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Front Buffer</text>		</g>
 		<g id="shape18-71" v:mID="18" v:groupContext="shape" transform="translate(409.74,-171.24)">
 			<title>Sheet.18</title>
 			<path d="M0 333.48 L22.5 333.48" class="st6"/>
