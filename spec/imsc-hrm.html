@@ -983,7 +983,19 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section id="substantive-changes-summary" class="appendix informative">
     <h2>Summary of substantive changes</h2>
 
-   
+    <section>
+      <h3>Reduce empty ISD complexity to zero</h3>
+      <p>In order to allow short (less than 100 ms) gaps between subtitles, which is common practice, the complexity of
+      presenting <a>empty ISDs</a> has been reduced to zero: instead of being drawn into the Back Buffer, an <a>empty
+      ISD</a> merely disconnects the Front Buffer from the display while it is presented.</p>
+    </section>
+
+    <section>
+      <h3>Complexity of clearing the Back Buffer applies to all non-empty ISDs</h3>
+      <p>The first <a>Intermediate Synchronic Document</a> is no longer treated differently and incurs a cost for
+      clearing the Back Buffer.</p>
+    </section>
+
   </section>
 </body>
 </html>
