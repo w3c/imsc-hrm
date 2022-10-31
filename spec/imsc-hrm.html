@@ -488,14 +488,17 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <img src="figures/isd-rendering-time-fig.svg" alt="ISD rendering and presentation times.">
 
         <figcaption>
-          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a>. For example, the
-          Presentation Compositor begins rendering E<sub>2</sub> at the presentation time of E<sub>1</sub> since
-          E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the Presentation Compositor begins rendering E<sub>5</sub>
-          at the presentation time of E<sub>2</sub> since both E<sub>3</sub> and E<sub>4</sub> are <a>empty ISDs</a>.
-          Furthermore, E<sub>2</sub> remains in the Front Buffer until the presentation time of E<sub>5</sub> but is not
-          presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the Front Buffer is not
-          available for display. Finally, the Presentation Compositor begins rendering E<sub>0</sub> at the presentation
-          time of E<sub>0</sub> minus IPD since E<sub>0</sub> is the first <a>Intermediate Synchronic Document</a>.
+          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a>, where the hatched
+          areas indicate time spent drawing the associated <a>Intermediate Synchronic Document</a>. For example, the
+          Presentation Compositor begins rendering E<sub>1</sub> at the presentation time of E<sub>0</sub> since
+          E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the Presentation Compositor begins rendering
+          E<sub>5</sub> at the presentation time of E<sub>5</sub> minus IPD since (i) both E<sub>3</sub> and
+          E<sub>4</sub> are <a>empty ISDs</a> and the presentation time of E<sub>5</sub> minus that of E<sub>2</sub> is
+          greater than IPD. Furthermore, E<sub>2</sub> remains in the Front Buffer until the presentation time of
+          E<sub>5</sub> but is not presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the
+          Front Buffer is not available for display. Finally, the Presentation Compositor begins rendering E<sub>0</sub>
+          at the presentation time of E<sub>0</sub> minus IPD since E<sub>0</sub> is the first <a>Intermediate
+          Synchronic Document</a>.
         </figcaption>
       </figure>
 
