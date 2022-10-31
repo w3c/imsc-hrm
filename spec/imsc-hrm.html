@@ -526,7 +526,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The contents of the Back Buffer SHALL be transferred instantaneously to the Front Buffer at the presentation
       time of a <a>non-empty ISD</a> E<sub>n</sub>, making the latter available for display.</p>
 
-      <p>The Front Buffer SHALL be disconnected from the display while an <a>empty ISD</a> is being presented.</p>
+      <p>The Front Buffer SHALL be:</p>
+      <ul>
+        <li>disconnected from the display while an <a>empty ISD</a> is being presented; and</li>
+        <li>SHALL be connected to the display, otherwise.</li>
+      </ul>
 
       <p class='note'>It is possible for the contents of the Front Buffer to never be displayed. This can happen, for
       example, if the Back Buffer is copied twice to Front Buffer between two consecutive video frame boundaries of the
