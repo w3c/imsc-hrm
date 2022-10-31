@@ -6,8 +6,8 @@
 
 ## Introduction
 
-The [IMSC Hypothetical Render Model (HRM)](https://www.w3.org/TR/imsc-hrm/) constrains the processing complexity of subtitle and
-caption documents that conform to the [IMSC Recommendation](https://www.w3.org/TR/ttml-imsc/).
+The [IMSC Hypothetical Render Model (HRM)](https://www.w3.org/TR/imsc-hrm/) constrains the presentation processing complexity of
+subtitle and caption documents that conform to the [IMSC Recommendation](https://www.w3.org/TR/ttml-imsc/).
 
 The HRM is not a new concept: it has been included in all versions and editions of the IMSC Recommendation and has remained
 substantially unchanged.
@@ -18,16 +18,16 @@ In order to simplify future maintenance, the TTWG wishes to refactor the HRM int
 ## Goals
 
 The objecive of the HRM is to allow subtitle and caption authors and providers to verify that the content they provide does not
-exceed defined complexity levels, so that playback systems can render the content synchronised with the author-specified display
-times.
+exceed defined presentation complexity levels, so that playback systems can render the content synchronised with the author-specified
+display times.
 
 ## Non-goals
 
-The HRM does not specify:
+The HRM does not specify or constrain:
 
 * document syntax, semantics and processing, which are specified in IMSC and its parent [TTML2
   Recommendation](https://www.w3.org/TR/ttml2/);
-* editorial requirements, e.g. subtitle and caption reading rates; and
+* readability complexity or other editorial requirements, e.g. subtitle and caption reading rates; and
 * how IMSC processors and renderers are implemented.
 
 ## User research
