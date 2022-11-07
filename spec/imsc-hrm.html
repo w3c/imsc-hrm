@@ -188,13 +188,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
 <body>
   <section id='abstract'>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of documents that conform to
-    any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of
+    documents that conform to any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
     model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
     requires the implementation of such a buffer, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
     that can be used to produce text output.</p>
+
+    <p>Furthermore, the model is not intended to constrain readability complexity.</p>
   </section>
 
   <section id='sotd'>
@@ -203,8 +205,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the complexity of a <a>IMSC Document
-    Instance</a>.</p>
+    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of a
+    <a>IMSC Document Instance</a>.</p>
   </section>
 
   <section id='conventions'>
@@ -227,6 +229,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p><dfn>empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with no <dfn
       data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+
+      <p><dfn>non-empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with at least one <a>presented region</a>.</p>
 
       <p><dfn>error</dfn>. A failure to conform to the constraints defined by this specification.</p>
 
@@ -410,7 +414,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <h2>Architecture</h2>
 
       <figure id='fig-hypothetical-render-model'>
-        <img src="figures/hypothetical-render-figure-1.png" alt="Hypothetical Render Model">
+        <img src="figures/hypothetical-render-figure-1.svg" alt="Hypothetical Render Model">
 
         <figcaption>
           Hypothetical Render Model
@@ -418,16 +422,23 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </figure>
 
       <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive
-      <a data-lt="Intermediate Synchronic Document">Intermediate Synchronic Documents</a> obtained from an input <a>IMSC Document
-      Instance</a>, and uses a simple double buffering model: while an <a>Intermediate Synchronic Document</a> E<sub>n</sub> is
-      being painted into Presentation Buffer P<sub>n</sub> (the "front buffer" of the model), the previous <a>Intermediate
-      Synchronic Document</a> E<sub>n-1</sub> is available for display in Presentation Buffer P<sub>n-1</sub> (the "back buffer" of
-      the model).</p>
+      <a>Intermediate Synchronic Documents</a> E<sub>i</sub> obtained from an input <a>IMSC Document Instance</a>:</p>
+      <ul>
+        <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
+        E<sub>n</sub> is being painted into a Back Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
+        for display in a Front Buffer; and</li>
+        <li><a>empty ISDs</a> merely disconnect the Front Buffer from the display when presented,
+        i.e., presenting an <a>empty ISD</a> is equivalent to presenting nothing.</li>
+      </ul>
 
-      <p>The model specifies a (hypothetical) time required for completely painting an <a>Intermediate Synchronic Document</a> as
-      a proxy for complexity. Painting includes drawing region backgrounds, rendering and copying glyphs, and decoding and copying
-      images. Complexity is then limited by requiring that painting of <a>Intermediate Synchronic Document</a> E<sub>n</sub>
-      completes before the end of <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>.</p>
+      <p>The model specifies a (hypothetical) time required for completely painting a <a>non-empty ISD</a>
+      as a proxy for complexity. Painting includes clearing the Back Buffer, drawing region backgrounds,
+      rendering and copying glyphs, and decoding and copying images. Complexity is then limited by requiring that
+      painting of <a>non-empty ISD</a> E<sub>n</sub> begins no earlier than the presentation time of the previous non-empty
+      <a>non-empty ISD</a> E<sub>m</sub> and completes by the presentation time of E<sub>n</sub>.</p>
+
+      <p>In contrast, there is no complexity involved connecting and disconnecting the Front Buffer from the display, and
+      thus no complexity associated with <a>empty ISDs</a>.</p>
 
       <p>Whenever applicable, constraints are specified relative to <dfn data-cite="ttml2#terms-root-container-region">Root
       Container Region</dfn> dimensions, allowing subtitle sequences to be authored independently of
@@ -448,11 +459,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='hypothetical-render-model-general'>
       <h2>General</h2>
 
-      <p>The Presentation Compositor SHALL render in Presentation Buffer P<sub>n</sub> each successive <a>Intermediate Synchronic
-      Document</a> E<sub>n</sub> using the following steps in order:</p>
+      <p>The Presentation Compositor SHALL render in the Back Buffer each successive <a>non-empty
+      ISD</a> E<sub>n</sub> using the following steps in order:</p>
 
       <ol>
-        <li>clear the pixels of the entire <a>Root Container Region</a>, unless n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>;</li>
+        <li>clear the pixels of the entire <a>Root Container Region</a>;</li>
 
         <li>paint, according to stacking order, all background pixels for each region;</li>
 
@@ -464,30 +475,35 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
-        <li>at the presentation time of E<sub>m</sub>, where E<sub>m</sub> is the closest ISD for which 0&lt;m&lt;n and E<sub>m-1</sub>
-        is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus that of E<sub>m</sub> is less than <a>IPD</a>; or
-      </li>
-        
+        <li>at the presentation time of E<sub>m</sub>, where m is the largest non-zero value that is both less than
+        n and is such that E<sub>m</sub> is not an <a>empty ISD</a>, if the presentation time of E<sub>n</sub> minus
+        that of E<sub>m</sub> is less than <a>IPD</a>; or</li>
         <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
-      <p class="note">The Presentation Compositor never renders an ISD more than <a>IPD</a> ahead of its presentation time and treats sequences of
-        <a>empty ISDs</a> as a single ISD.</p>
+      <p class="note">The Presentation Compositor never begins rendering an ISD more than <a>IPD</a> ahead of its
+      presentation time.</p>
 
       <figure id='fig-rendering-presentation-time'>
-        <img src="figures/isd-rendering-time-fig.png" alt="ISD rendering and presentation times.">
+        <img src="figures/isd-rendering-time-fig.svg" alt="ISD rendering and presentation times.">
 
         <figcaption>
-          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a> by the Presentation Compositor. The
-          Presentation Compositor renders E<sub>n</sub> at the presentation time of E<sub>n-2</sub> since E<sub>n-1</sub> is an
-          <a>empty ISD</a>. In contrast, the Presentation Compositor renders E<sub>n-2</sub> at the presentation time of
-          E<sub>n-3</sub> since E<sub>n-4</sub> is not an <a>empty ISD</a>. Finally, E<sub>0</sub> is rendered at the presentation
-          time of E<sub>0</sub> minus IPD.
+          illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a>, where the hatched
+          areas indicate time spent drawing the associated <a>Intermediate Synchronic Document</a>. For example, the
+          Presentation Compositor begins rendering E<sub>1</sub> at the presentation time of E<sub>0</sub> since
+          E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the Presentation Compositor begins rendering
+          E<sub>5</sub> at the presentation time of E<sub>5</sub> minus IPD since (i) both E<sub>3</sub> and
+          E<sub>4</sub> are <a>empty ISDs</a> and the presentation time of E<sub>5</sub> minus that of E<sub>2</sub> is
+          greater than IPD. Furthermore, E<sub>2</sub> remains in the Front Buffer until the presentation time of
+          E<sub>5</sub> but is not presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the
+          Front Buffer is not available for display. Finally, the Presentation Compositor begins rendering E<sub>0</sub>
+          at the presentation time of E<sub>0</sub> minus IPD since E<sub>0</sub> is the first <a>Intermediate
+          Synchronic Document</a>.
         </figcaption>
       </figure>
 
-      <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the Presentation
-      Buffer P<sub>n</sub> SHALL be:</p>
+      <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the
+      Back Buffer SHALL be:</p>
 
       <p class="equation">DUR(E<sub>n</sub>) = S(E<sub>n</sub>) / BDraw + DUR<sub>T</sub>(E<sub>n</sub>) +
       DUR<sub>I</sub>(E<sub>n</sub>)</p>
@@ -510,16 +526,21 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </li>
       </ul>
 
-      <p>The contents of the Presentation Buffer P<sub>n</sub> SHALL be transferred instantaneously to Presentation Buffer
-      P<sub>n-1</sub> at the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, making the latter
-      available for display.</p>
+      <p>The contents of the Back Buffer SHALL be transferred instantaneously to the Front Buffer at the presentation
+      time of a <a>non-empty ISD</a> E<sub>n</sub>, making the latter available for display.</p>
 
-      <p class='note'>It is possible for the contents of Presentation Buffer P<sub>n-1</sub> to never be displayed. This can happen
-      if Presentation Buffer P<sub>n</sub> is copied twice to Presentation Buffer P<sub>n-1</sub> between two consecutive video
-      frame boundaries of the <a>Related Video Object</a>.</p>
+      <p>The Front Buffer SHALL be:</p>
+      <ul>
+        <li>disconnected from the display while an <a>empty ISD</a> is being presented; and</li>
+        <li>connected to the display, otherwise.</li>
+      </ul>
 
-      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for E<sub>n</sub> before the
-      presentation time of E<sub>n</sub>.</p>
+      <p class='note'>It is possible for the contents of the Front Buffer to never be displayed. This can happen, for
+      example, if the Back Buffer is copied twice to Front Buffer between two consecutive video frame boundaries of the
+      <a>Related Video Object</a>.</p>
+
+      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
+      <a>non-empty ISD</a> E<sub>n</sub> before its presentation time.</p>
 
       <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
 
@@ -561,9 +582,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 0 if n=0 or E<sub>n-1</sub> is an <a>empty ISD</a>, and CLEAR(E<sub>n</sub>) = 1 otherwise.</p>
+      <p>where CLEAR(E<sub>n</sub>) = 1.</p>
 
-      <p class='note'>To ensure consistency of the Presentation Buffer, a new <a>Intermediate Synchronic Document</a> requires
+      <p class='note'>To ensure consistency of the Back Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
 
       <p>PAINT(E<sub>n</sub>) SHALL be the normalized area to be painted for all regions that are used in <a>Intermediate
@@ -608,28 +629,28 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-images'>
       <h2>Paint Images</h2>
 
-      <p>The Presentation Compositor SHALL paint into the Presentation Buffer P<sub>n</sub> all visible pixels of <a>presented
+      <p>The Presentation Compositor SHALL paint into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
       <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor SHALL either:</p>
 
       <ul>
         <li>if an identical image is present in Decoded Image Buffer D<sub>n</sub>, copy the image from Decoded Image Buffer
-        D<sub>n</sub> to the Presentation Buffer P<sub>n</sub> using the Image Copier; or</li>
+        D<sub>n</sub> to the Back Buffer using the Image Copier; or</li>
 
         <li>if an identical image is present in Decoded Image Buffer D<sub>n-1</sub>, i.e. an identical image was present in
         <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Image Copier the image from Decoded Image Buffer
-        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Presentation Buffer P<sub>n</sub>; or
+        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Back Buffer; or
         </li>
 
-        <li>otherwise, decode the image using the Image Decoder the image into the Presentation Buffer P<sub>n</sub> and Decoded
+        <li>otherwise, decode the image, using the Image Decoder, into the Back Buffer and Decoded
         Image Buffer D<sub>n</sub>.</li>
       </ul>
 
       <p>Two images SHALL be identical if and only if they reference the same encoded image source.</p>
 
       <p>The duration DUR<sub>I</sub>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub> in the Presentation Buffer SHALL be as follows:</p>
+      E<sub>n</sub> in the Back Buffer SHALL be as follows:</p>
 
       <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> NRGA(I<sub>i</sub>) / ICpy
       + ∑<sub>I<sub>j</sub> ∈ I<sub>d</sub></sub> NSIZ(I<sub>j</sub>) / IDec</p>
@@ -742,15 +763,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <ul>
         <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n</sub>, copy the <a>glyph</a> from Glyph Buffer
-        G<sub>n</sub> to the Presentation Buffer P<sub>n</sub> using the Glyph Copier; or
+        G<sub>n</sub> to the Back Buffer using the Glyph Copier; or
         </li>
 
         <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n-1</sub>, i.e. an identical <a>glyph</a> was present in
         <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Glyph Copier the <a>glyph</a> from Glyph Buffer
-        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Presentation Buffer P<sub>n</sub>; or
+        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Back Buffer; or
         </li>
 
-        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Presentation Buffer P<sub>n</sub> and Glyph Buffer
+        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Buffer
         G<sub>n</sub>.
         </li>
       </ul>
@@ -764,7 +785,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </figure>
 
       <p>The duration DUR<sub>T</sub>(E<sub>n</sub>) for rendering the text of an <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub> in the Presentation Buffer is as follows:</p>
+      E<sub>n</sub> in the Back Buffer is as follows:</p>
 
       <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> NRGA(g<sub>i</sub>)
       / Ren(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> NRGA(g<sub>j</sub>) / GCpy</p>
@@ -772,11 +793,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>where</p>
 
       <ul>
-        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Presentation Buffer P<sub>n</sub>
+        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Back Buffer
         using the Glyph Renderer in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
-        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Presentation Buffer P<sub>n</sub> using
+        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Back Buffer using
         the Glyph Copier in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
@@ -969,7 +990,19 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section id="substantive-changes-summary" class="appendix informative">
     <h2>Summary of substantive changes</h2>
 
-   
+    <section>
+      <h3>Reduce empty ISD complexity to zero</h3>
+      <p>In order to allow short (less than 100 ms) gaps between subtitles, which is common practice, the complexity of
+      presenting <a>empty ISDs</a> has been reduced to zero: instead of being drawn into the Back Buffer, an <a>empty
+      ISD</a> merely disconnects the Front Buffer from the display while it is presented.</p>
+    </section>
+
+    <section>
+      <h3>Complexity of clearing the Back Buffer applies to all non-empty ISDs</h3>
+      <p>The first <a>Intermediate Synchronic Document</a> is no longer treated differently and incurs a cost for
+      clearing the Back Buffer.</p>
+    </section>
+
   </section>
 </body>
 </html>
