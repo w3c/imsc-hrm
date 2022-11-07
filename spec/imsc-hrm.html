@@ -192,7 +192,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     documents that conform to any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
-    model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
+    model defines a glyph buffers for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
     requires the implementation of such a buffer, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
     that can be used to produce text output.</p>
 
@@ -447,11 +447,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>To enable scenarios where the same glyphs are used in multiple successive <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
-      [[CEA-608]] and [[CEA-708]]), the Glyph Buffers G<sub>n</sub> and G<sub>n-1</sub> store rendered glyphs across <a data-lt=
+      [[CEA-608]] and [[CEA-708]]), the Glyph Front and Back Buffers store rendered glyphs across <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
       Buffer instead of rendered, a more costly operation.</p>
 
-      <p>Similarly, Decoded Image Buffers D<sub>n</sub> and D<sub>n-1</sub> store decoded images across <a data-lt=
+      <p>Similarly, Decoded Image Front and Back Buffers store decoded images across <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
     </section>
@@ -635,16 +635,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor SHALL either:</p>
 
       <ul>
-        <li>if an identical image is present in Decoded Image Buffer D<sub>n</sub>, copy the image from Decoded Image Buffer
-        D<sub>n</sub> to the Back Buffer using the Image Copier; or</li>
+        <li>if an identical image is present in Decoded Image Back Buffer, copy the image from Decoded Image Back Buffer
+        to the Back Buffer using the Image Copier; or</li>
 
-        <li>if an identical image is present in Decoded Image Buffer D<sub>n-1</sub>, i.e. an identical image was present in
-        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Image Copier the image from Decoded Image Buffer
-        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Back Buffer; or
+        <li>if an identical image is present in Decoded Image Front Buffer, i.e. an identical image was present in
+        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Image Copier the image from Decoded Image Front Buffer
+        to both the Decoded Image Back Buffer and the Back Buffer; or
         </li>
 
         <li>otherwise, decode the image, using the Image Decoder, into the Back Buffer and Decoded
-        Image Buffer D<sub>n</sub>.</li>
+        Image Back Buffer.</li>
       </ul>
 
       <p>Two images SHALL be identical if and only if they reference the same encoded image source.</p>
@@ -676,13 +676,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>NSIZ(I<sub>i</sub>) SHALL be the number of pixels of <a>presented image</a> I<sub>i</sub>.</p>
 
-      <p>The contents of the Decoded Image Buffer D<sub>n</sub> SHALL be transferred instantaneously to Decoded Image Buffer
-      D<sub>n-1</sub> at the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
+      <p>The contents of the Decoded Image Back Buffer SHALL be transferred instantaneously to the Decoded Image Front Buffer
+      at the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>The total size occupied by images stored in Decoded Image Buffers D<sub>n</sub> or D<sub>n-1</sub> SHALL be the sum of
+      <p>The total size occupied by images stored in Decoded Image Back Buffer or Decoded Image Front Buffer SHALL be the sum of
       their Normalized Image Area.</p>
 
-      <p>The size of Decoded Image Buffers D<sub>n</sub> or D<sub>n-1</sub> SHALL be the Normalized Decoded Image Buffer Size
+      <p>The size of Decoded Image Back Buffer or Decoded Image Front Buffer SHALL be the Normalized Decoded Image Buffer Size
       (NDIBS).</p>
 
       <p>Unless specified otherwise, the following table SHALL specify ICpy, IDec, and NDBIS.</p>
@@ -762,17 +762,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       E<sub>n</sub>, the Presentation Compositor SHALL:</p>
 
       <ul>
-        <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n</sub>, copy the <a>glyph</a> from Glyph Buffer
-        G<sub>n</sub> to the Back Buffer using the Glyph Copier; or
+        <li>if an identical <a>glyph</a> is present in Glyph Back Buffer, copy the <a>glyph</a> from Glyph Back Buffer
+        to the Back Buffer using the Glyph Copier; or
         </li>
 
-        <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n-1</sub>, i.e. an identical <a>glyph</a> was present in
-        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Glyph Copier the <a>glyph</a> from Glyph Buffer
-        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Back Buffer; or
+        <li>if an identical <a>glyph</a> is present in Glyph Front Buffer, i.e. an identical <a>glyph</a> was present in
+        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copy using the Glyph Copier the <a>glyph</a> from Glyph Front Buffer
+        to both the Glyph Back Buffer and the Back Buffer; or
         </li>
 
-        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Buffer
-        G<sub>n</sub>.
+        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Back Buffer.
         </li>
       </ul>
 
@@ -816,10 +815,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       typographical glyph aspect ratio. An implementation can determine an actual buffer size needs based on worst-case glyph size
       complexity.</p>
 
-      <p>The contents of the Glyph Buffer G<sub>n</sub> SHALL be copied instantaneously to Glyph Buffer G<sub>n-1</sub> at the
+      <p>The contents of the Glyph Back Buffer SHALL be copied instantaneously to Glyph Front Buffer at the
       presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
+      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Back Buffer
       to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
 
       <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
