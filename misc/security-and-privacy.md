@@ -1,6 +1,9 @@
 # [Self-Review Questionnaire: Security and Privacy](https://w3ctag.github.io/security-questionnaire/)
 
-This questionnaire has [moved](https://w3ctag.github.io/security-questionnaire/).
+# Security and Privacy Horizontal Reviews for IMSC-HRM
+
+* PING review: w3cping/privacy-request#65
+* Security review: w3c/security-request#18
 
 # Security and Privacy Self-review for IMSC-HRM
 
@@ -13,6 +16,9 @@ https://raw.githubusercontent.com/w3ctag/security-questionnaire/main/questionnai
 
 None. The IMSC-HRM is a static-analysis algorithm of IMSC documents.
 Executing the algorithm requires no requests to any origins.
+The resource that it processes is an IMSC Document Instance.
+This specification does not define any protocol or interface for obtaining such a resource,
+and it does not define any interface for exposing the results of the analysis.
 
 > 02.  Do features in your specification expose the minimum amount of information
 >      necessary to enable their intended uses?
