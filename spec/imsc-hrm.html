@@ -425,8 +425,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <a>Intermediate Synchronic Documents</a> E<sub>i</sub> obtained from an input <a>IMSC Document Instance</a>:</p>
       <ul>
         <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
-        E<sub>n</sub> is being painted into a Back Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
-        for display in a Front Buffer; and</li>
+        E<sub>n</sub> is being painted into a Back Buffer by the Presentation Compositor, the previous <a>non-empty
+        ISD</a> E<sub>m</sub> is available for display in a Front Buffer; and</li>
         <li><a>empty ISDs</a> merely disconnect the Front Buffer from the display when presented,
         i.e., presenting an <a>empty ISD</a> is equivalent to presenting nothing.</li>
       </ul>
