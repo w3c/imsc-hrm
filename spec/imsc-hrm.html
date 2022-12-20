@@ -205,12 +205,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>content producing implementation</li>
         <li>validating implementation</li>
       </ul>
-      <p>The Working Group has identified the following <a href="https://www.w3.org/2021/Process-20211102/#at-risk">at
-      risk</a> feature: validation of documents that conform to the IMSC Image Profile. This feature is expected to be
-      removed before advancement to Proposed Recommendation if sufficient implementation experience cannot be
-      demonstrated.</p>
+      <p>The Working Group has identified the following <dfn data-cite="w3c-process/#at-risk">at
+      risk</dfn> features:</p>
 
-      <p>The history of substantive changes applied to the document is summarized at <a href="#substantive-changes-summary">.</a>.
+      <ul>
+        <li class="issue" data-number="63"></li>
+      </ul>
+
+      <p><a>At risk</a> features may be be removed before advancement to Proposed Recommendation.</p>
+
+      <p>The history of substantive changes made to this document is summarized at <a href="#substantive-changes-summary"></a>.
   </section>
 
   <section id='scope'>
@@ -253,6 +257,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <p>
       Unless noted otherwise, this specification applies to an <a>IMSC Document Instance</a>.
     </p>
+    <div class="issue" data-number="63"></div>
     <p>
       A sequence of consecutive <dfn data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Documents</dfn>
       conforms to the Hypothetical Render Model if is processed without <a>error</a>.
@@ -464,6 +469,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>Similarly, Decoded Image Buffers D<sub>n</sub> and D<sub>n-1</sub> store decoded images across <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
+
+      <div class="issue" data-number="63"></div>
     </section>
 
     <section id='hypothetical-render-model-general'>
@@ -533,6 +540,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
         <li>DUR<sub>I</sub>(E<sub>n</sub>) is the duration, in seconds, for painting the image subtitle content for <a>Intermediate
         Synchronic Document</a> E<sub>n</sub>, as specified in Section <a href="#paint-images">.</a>
+        <div class="issue" data-number="63"></div>
         </li>
       </ul>
 
@@ -638,6 +646,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
     <section id='paint-images'>
       <h2>Paint Images</h2>
+
+      <div class="issue" data-number="63"></div>
 
       <p>The Presentation Compositor SHALL paint into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
