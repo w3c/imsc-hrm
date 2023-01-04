@@ -227,7 +227,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p><dfn data-lt="code point|code points">code point</dfn>. As defined by [[i18n-glossary]].</p>
 
-      <p><dfn>empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with no <dfn
+      <p><dfn>empty ISD</dfn>. An <dfn
+        data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Document</dfn> with no <dfn
       data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
 
       <p><dfn>non-empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with at least one <a>presented region</a>.</p>
@@ -244,14 +245,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Unless noted otherwise, this specification applies to an <a>IMSC Document Instance</a>.
     </p>
     <p>
-      Given a sequence of consecutive <dfn data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate
-      Synchronic Documents</dfn> generated using the <i>Intermediate Synchronic Document Construction</i> procedure
-      specified in [[!TTML2]] from one or more input <a>IMSC Document Instances</a>, the sequence of
-      <a>Intermediate Synchronic Documents</a> <i>conforms to the Hypothetical Render Model</i> SHALL be processed
-      without <a>error</a> by the HRM algorithm specified at <a href="#hypothetical-render-model-general"></a>.
+      A <a>IMSC Document Instance</a> <i>conforms to the Hypothetical Render Model</i> if the sequence of
+      <a>Intermediate Synchronic Documents</a> generated from it using the <i>Intermediate Synchronic Document
+      Construction</i> procedure specified in [[!TTML2]] is processed without <a>error</a> by the HRM algorithm
+      specified at <a href="#hypothetical-render-model-general"></a>.
     </p>
     <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
+    <p class="note">Conformance can be applied to a sequence of <a>Document Instances</a> by constructing a single
+    <a>Document Instance</a> whose underlying sequence of <a>Intermediate Synchronic Documents</a> is identical to that
+    resulting from the sequence of <a>Document Instances</a>.</p>
   </section>
 
   <section class="informative">
@@ -425,8 +428,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </figure>
 
       <p>The HRM, illustrated in <a href="#fig-hypothetical-render-model"></a>, operates on a sequence of
-      <a>Intermediate Synchronic Documents</a> E<sub>i</sub> generated using the <i>Intermediate Synchronic Document
-      Construction</i> procedure specified in [[!TTML2]] from one or more input <a>IMSC Document Instances</a>:</p>
+      <a>Intermediate Synchronic Documents</a> E<sub>i</sub>:</p>
       <ul>
         <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
         E<sub>n</sub> is being painted into a Back Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
@@ -545,7 +547,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       example, if the Back Buffer is copied twice to Front Buffer between two consecutive video frame boundaries of the
       <a>Related Video Object</a>.</p>
 
-      <p>It is an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
+      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
       <a>non-empty ISD</a> E<sub>n</sub> before its presentation time.</p>
 
       <p>The following table specifies the values of <a>IPD</a> and BDraw.</p>
@@ -825,8 +827,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The contents of the Glyph Buffer G<sub>n</sub> are copied instantaneously to Glyph Buffer G<sub>n-1</sub> at the
       presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>It is an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph Buffer G<sub>n</sub>
-      to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
+      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph
+      Buffer G<sub>n</sub> to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
 
       <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
 
