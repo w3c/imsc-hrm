@@ -425,7 +425,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <a>Intermediate Synchronic Documents</a> E<sub>i</sub> obtained from an input <a>IMSC Document Instance</a>:</p>
       <ul>
         <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
-        E<sub>n</sub> is being painted into a Back Buffer by the Presentation Compositor, the previous <a>non-empty
+        E<sub>n</sub> is being painted into a Back Buffer by the <dfn>Presentation Compositor</dfn>, the previous <a>non-empty
         ISD</a> E<sub>m</sub> is available for display in a Front Buffer; and</li>
         <li><a>empty ISDs</a> merely disconnect the Front Buffer from the display when presented,
         i.e., presenting an <a>empty ISD</a> is equivalent to presenting nothing.</li>
@@ -459,7 +459,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='hypothetical-render-model-general'>
       <h2>General</h2>
 
-      <p>The Presentation Compositor SHALL render in the Back Buffer each successive <a>non-empty
+      <p>The <a>Presentation Compositor</a> SHALL render in the Back Buffer each successive <a>non-empty
       ISD</a> E<sub>n</sub> using the following steps in order:</p>
 
       <ol>
@@ -472,7 +472,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>paint the text or image subtitle content.</li>
       </ol>
 
-      <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
+      <p>The <a>Presentation Compositor</a> SHALL start rendering E<sub>n</sub>:</p>
 
       <ul>
         <li>at the presentation time of E<sub>m</sub>, where m is the largest non-zero value that is both less than
@@ -481,7 +481,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>at the presentation time of E<sub>n</sub> minus <a>IPD</a>, otherwise.</li>
       </ul>
 
-      <p class="note">The Presentation Compositor never begins rendering an ISD more than <a>IPD</a> ahead of its
+      <p class="note">The <a>Presentation Compositor</a> never begins rendering an ISD more than <a>IPD</a> ahead of its
       presentation time.</p>
 
       <figure id='fig-rendering-presentation-time'>
@@ -490,13 +490,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <figcaption>
           illustrates the rendering and presentation of <a>Intermediate Synchronic Documents</a>, where the hatched
           areas indicate time spent drawing the associated <a>Intermediate Synchronic Document</a>. For example, the
-          Presentation Compositor begins rendering E<sub>1</sub> at the presentation time of E<sub>0</sub> since
-          E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the Presentation Compositor begins rendering
+          <a>Presentation Compositor</a> begins rendering E<sub>1</sub> at the presentation time of E<sub>0</sub> since
+          E<sub>1</sub> is not an <a>empty ISD</a>. In contrast, the <a>Presentation Compositor</a> begins rendering
           E<sub>5</sub> at the presentation time of E<sub>5</sub> minus IPD since (i) both E<sub>3</sub> and
           E<sub>4</sub> are <a>empty ISDs</a> and the presentation time of E<sub>5</sub> minus that of E<sub>2</sub> is
           greater than IPD. Furthermore, E<sub>2</sub> remains in the Front Buffer until the presentation time of
           E<sub>5</sub> but is not presented while E<sub>3</sub> and E<sub>4</sub> are presented, during which time the
-          Front Buffer is not available for display. Finally, the Presentation Compositor begins rendering E<sub>0</sub>
+          Front Buffer is not available for display. Finally, the <a>Presentation Compositor</a> begins rendering E<sub>0</sub>
           at the presentation time of E<sub>0</sub> minus IPD since E<sub>0</sub> is the first <a>Intermediate
           Synchronic Document</a>.
         </figcaption>
@@ -539,7 +539,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       example, if the Back Buffer is copied twice to Front Buffer between two consecutive video frame boundaries of the
       <a>Related Video Object</a>.</p>
 
-      <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
+      <p>It SHALL be an <a>error</a> for the <a>Presentation Compositor</a> to fail to complete painting pixels for
       <a>non-empty ISD</a> E<sub>n</sub> before its presentation time.</p>
 
       <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
@@ -629,10 +629,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-images'>
       <h2>Paint Images</h2>
 
-      <p>The Presentation Compositor SHALL paint into the Back Buffer all visible pixels of <a>presented
+      <p>The <a>Presentation Compositor</a> SHALL paint into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor SHALL either:</p>
+      <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the <a>Presentation Compositor</a> SHALL either:</p>
 
       <ul>
         <li>if an identical image is present in Decoded Image Buffer D<sub>n</sub>, copy the image from Decoded Image Buffer
@@ -759,7 +759,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </p>
 
       <p>For each <a>glyph</a> associated with a <a>character</a> in a <a>presented region</a> of <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub>, the Presentation Compositor SHALL:</p>
+      E<sub>n</sub>, the <a>Presentation Compositor</a> SHALL:</p>
 
       <ul>
         <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n</sub>, copy the <a>glyph</a> from Glyph Buffer
@@ -777,10 +777,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </ul>
 
       <figure>
-        <img src="figures/text-render-example-figure-2.png" alt="Example of Presentation Compositor Behavior for Text Rendering">
+        <img src="figures/text-render-example-figure-2.png" alt="Example of <a>Presentation Compositor</a> Behavior for Text Rendering">
 
         <figcaption>
-          Example of Presentation Compositor Behavior for Text Rendering
+          Example of <a>Presentation Compositor</a> Behavior for Text Rendering
         </figcaption>
       </figure>
 
