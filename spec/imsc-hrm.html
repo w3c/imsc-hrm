@@ -252,9 +252,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </p>
     <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
-    <p class="note">Conformance can be applied to a sequence of <a>Document Instances</a> by constructing a single
-    <a>Document Instance</a> whose underlying sequence of <a>Intermediate Synchronic Documents</a> is identical to that
-    resulting from the sequence of <a>Document Instances</a>.</p>
+    <p class="note">In applications where sequences of <a>Document Instances</a>
+    can be resolved into a single sequence of <a>Intermediate Synchronic Documents</a>
+    that do not overlap each other temporally,
+    conformance can be determined based on a synthesised <a>Document Instance</a>
+    that generates an equivalent sequence of <a>Intermediate Synchronic Documents</a>,
+    where minimal equivalence is limited to the content and metrics that are used
+    to identify <a>errors</a>.</p>
   </section>
 
   <section class="informative">
