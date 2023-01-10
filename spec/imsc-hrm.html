@@ -223,11 +223,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       data-cite="ttml2#terms-character-information-item">Character Information Item</dfn>.</p>
 
       <p class="note">The term <a>character</a> is for practical purposes
-        the same as a <a>code point</a>.</p>
+        the same as a <dfn>code point</dfn>, as defined by [[?i18n-glossary]].</p>
 
-      <p><dfn data-lt="code point|code points">code point</dfn>. As defined by [[i18n-glossary]].</p>
-
-      <p><dfn>empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with no <dfn
+      <p><dfn>empty ISD</dfn>. An <dfn
+        data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Document</dfn> with no <dfn
       data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
 
       <p><dfn>non-empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with at least one <a>presented region</a>.</p>
@@ -244,11 +243,20 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Unless noted otherwise, this specification applies to an <a>IMSC Document Instance</a>.
     </p>
     <p>
-      A sequence of consecutive <dfn data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Documents</dfn>
-      conforms to the Hypothetical Render Model if is processed without <a>error</a>.
+      A <a>IMSC Document Instance</a> <i>conforms to the Hypothetical Render Model</i> if the sequence of
+      <a>Intermediate Synchronic Documents</a> generated from it using the <i>Intermediate Synchronic Document
+      Construction</i> procedure specified in [[!TTML2]] is processed without <a>error</a> by the HRM algorithm
+      specified at <a href="#hypothetical-render-model-general"></a>.
     </p>
     <p class="note">Applying the Hypothetical Render Model to a <a>Document Instance</a> that is not an <a>IMSC Document
     Instance</a> yields results that might not reflect the complexity of the <a>Document Instance</a>.</p>
+    <p class="note">In applications where sequences of <a>Document Instances</a>
+    can be resolved into a single sequence of <a>Intermediate Synchronic Documents</a>
+    that do not overlap each other temporally,
+    conformance can be determined based on a synthesised <a>Document Instance</a>
+    that generates an equivalent sequence of <a>Intermediate Synchronic Documents</a>,
+    where minimal equivalence is limited to the content and metrics that are used
+    to identify <a>errors</a>.</p>
   </section>
 
   <section class="informative">
@@ -346,7 +354,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           <a>characters</a> that are then presented for over 59 seconds. This generates a
           high rendering complexity for the 835 <a>characters</a>, since there is only a
           brief time available to paint them.</p>
-        <p>In the second, 210 <a>characters</a> must be
+        <p>In the second, 210 <a>characters</a> are
           painted every 15 seconds, giving 15 seconds to prepare for the next
           presentation. This has a much lower rendering complexity.</p>
       </div>
@@ -421,8 +429,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </figcaption>
       </figure>
 
-      <p>The model illustrated in <a href="#fig-hypothetical-render-model"></a> operates on successive
-      <a>Intermediate Synchronic Documents</a> E<sub>i</sub> obtained from an input <a>IMSC Document Instance</a>:</p>
+      <p>The HRM, illustrated in <a href="#fig-hypothetical-render-model"></a>, operates on a sequence of
+      <a>Intermediate Synchronic Documents</a> E<sub>i</sub>:</p>
       <ul>
         <li><a>non-empty ISDs</a> are processed using a simple double buffering model: while a <a>non-empty ISD</a>
         E<sub>n</sub> is being painted into a Back Buffer, the previous <a>non-empty ISD</a> E<sub>m</sub> is available
@@ -457,10 +465,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     </section>
 
     <section id='hypothetical-render-model-general'>
-      <h2>General</h2>
+      <h2>Algorithm</h2>
 
-      <p>The Presentation Compositor SHALL render in the Back Buffer each successive <a>non-empty
-      ISD</a> E<sub>n</sub> using the following steps in order:</p>
+      <p>The HRM algorithm processes a sequence of <a>Intermediate Synchronic Documents</a> E<sub>n</sub>.</p>
+
+      <p>Each successive <a>non-empty ISD</a> E<sub>n</sub> is rendered by the Presentation Compositor using the
+      following steps in order:</p>
 
       <ol>
         <li>clear the pixels of the entire <a>Root Container Region</a>;</li>
@@ -472,7 +482,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>paint the text or image subtitle content.</li>
       </ol>
 
-      <p>The Presentation Compositor SHALL start rendering E<sub>n</sub>:</p>
+      <p>The Presentation Compositor begins rendering E<sub>n</sub>:</p>
 
       <ul>
         <li>at the presentation time of E<sub>m</sub>, where m is the largest non-zero value that is both less than
@@ -503,7 +513,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </figure>
 
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the
-      Back Buffer SHALL be:</p>
+      Back Buffer is given by:</p>
 
       <p class="equation">DUR(E<sub>n</sub>) = S(E<sub>n</sub>) / BDraw + DUR<sub>T</sub>(E<sub>n</sub>) +
       DUR<sub>I</sub>(E<sub>n</sub>)</p>
@@ -526,10 +536,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </li>
       </ul>
 
-      <p>The contents of the Back Buffer SHALL be transferred instantaneously to the Front Buffer at the presentation
+      <p>The contents of the Back Buffer are transferred instantaneously to the Front Buffer at the presentation
       time of a <a>non-empty ISD</a> E<sub>n</sub>, making the latter available for display.</p>
 
-      <p>The Front Buffer SHALL be:</p>
+      <p>The Front Buffer is:</p>
       <ul>
         <li>disconnected from the display while an <a>empty ISD</a> is being presented; and</li>
         <li>connected to the display, otherwise.</li>
@@ -542,7 +552,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>It SHALL be an <a>error</a> for the Presentation Compositor to fail to complete painting pixels for
       <a>non-empty ISD</a> E<sub>n</sub> before its presentation time.</p>
 
-      <p>Unless specified otherwise, the following table SHALL specify values for <a>IPD</a> and BDraw.</p>
+      <p>The following table specifies the values of <a>IPD</a> and BDraw.</p>
 
       <table class='simple'>
         <thead>
@@ -578,7 +588,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-regions'>
       <h2>Paint Regions</h2>
 
-      <p>The total normalized drawing area S(E<sub>n</sub>) for <a>Intermediate Synchronic Document</a> E<sub>n</sub> SHALL be</p>
+      <p>The total normalized drawing area S(E<sub>n</sub>) for <a>Intermediate Synchronic Document</a> E<sub>n</sub> is given by:</p>
 
       <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
@@ -587,16 +597,16 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class='note'>To ensure consistency of the Back Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
 
-      <p>PAINT(E<sub>n</sub>) SHALL be the normalized area to be painted for all regions that are used in <a>Intermediate
+      <p>PAINT(E<sub>n</sub>) is the normalized area to be painted for all regions that are used in <a>Intermediate
       Synchronic Document</a> E<sub>n</sub> according to:</p>
 
       <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> NSIZE(R<sub>i</sub>) ∙
       NBG(R<sub>i</sub>)</p>
 
-      <p>where R<sub>p</sub> SHALL be the set of <a data-lt="presented region">presented regions</a> in the <a>Intermediate Synchronic
+      <p>where R<sub>p</sub> is the set of <a data-lt="presented region">presented regions</a> in the <a>Intermediate Synchronic
       Document</a> E<sub>n</sub>.</p>
 
-      <p>NSIZE(R<sub>i</sub>) SHALL be given by:</p>
+      <p>NSIZE(R<sub>i</sub>) is given by:</p>
 
       <p class="equation">NSIZE(R<sub>i</sub>) = (width of R<sub>i</sub> ∙ height of R<sub>i</sub> ) ÷ (<a>Root Container
       Region</a> height ∙ <a>Root Container Region</a> width)</p>
@@ -606,7 +616,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <code>tts:extent="1920px 1080px"</code>, NSIZE(R<sub>i</sub>) ≈ 0.00603.
       </aside>
 
-      <p>NBG(R<sub>i</sub>) SHALL be the total number of elements within the tree rooted at region R<sub>i</sub> that satisfy the following criteria:</p>
+      <p>NBG(R<sub>i</sub>) is the total number of elements within the tree rooted at region R<sub>i</sub> that satisfy the following criteria:</p>
 
       <ul>
         <li>the element is either a <code>region</code>, <code>body</code>, <code>div</code>, <code>p</code> or 
@@ -629,23 +639,23 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-images'>
       <h2>Paint Images</h2>
 
-      <p>The Presentation Compositor SHALL paint into the Back Buffer all visible pixels of <a>presented
+      <p>The Presentation Compositor paints into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
 
-      <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor SHALL either:</p>
+      <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor either:</p>
 
       <ul>
-        <li>if an identical image is present in the Decoded Image Cache, copy the image from the Decoded Image Cache
+        <li>if an identical image is present in the Decoded Image Cache, copies the image from the Decoded Image Cache
         to the Back Buffer using the Image Copier and flag the image as <i>retain</i>; or</li>
 
-        <li>otherwise, decode the image, using the Image Decoder, into both the Back Buffer and the Decoded Image Cache,
-        and flag the image as <i>retain</i>.</li>
+        <li>otherwise, decodes the image, using the Image Decoder, into both the Back Buffer and the Decoded Image Cache,
+        and flags the image as <i>retain</i>.</li>
       </ul>
 
-      <p>Two images SHALL be identical if and only if they reference the same encoded image source.</p>
+      <p>Two images are identical if and only if they reference the same encoded image source.</p>
 
       <p>The duration DUR<sub>I</sub>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub> in the Back Buffer SHALL be as follows:</p>
+      E<sub>n</sub> in the Back Buffer is given by:</p>
 
       <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> NRGA(I<sub>i</sub>) / ICpy
       + ∑<sub>I<sub>j</sub> ∈ I<sub>d</sub></sub> NSIZ(I<sub>j</sub>) / IDec</p>
@@ -664,12 +674,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>ICpy is the normalized image copy performance factor.</li>
       </ul>
 
-      <p>NRGA(I<sub>i</sub>) is the Normalized Image Area of <a>presented image</a> I<sub>i</sub> and SHALL be equal to:</p>
+      <p>NRGA(I<sub>i</sub>) is the Normalized Image Area of <a>presented image</a> I<sub>i</sub> and is given by:</p>
 
       <p class="equation">NRGA(I<sub>i</sub>)= (width of I<sub>i</sub> ∙ height of I<sub>i</sub> ) ÷ ( <a>Root Container
       Region</a> height ∙ <a>Root Container Region</a> width )</p>
 
-      <p>NSIZ(I<sub>i</sub>) SHALL be the number of pixels of <a>presented image</a> I<sub>i</sub>.</p>
+      <p>NSIZ(I<sub>i</sub>) is the number of pixels of <a>presented image</a> I<sub>i</sub>.</p>
 
       <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>:</p>
       <ol>
@@ -683,7 +693,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class="note">The abbreviation NDIBS reflects the name of the Decoded Image Cache from earlier editions of the
       specification.</p>
 
-      <p>Unless specified otherwise, the following table SHALL specify ICpy, IDec, and NDBIS.</p>
+      <p>The following table specifies the values of ICpy, IDec, and NDBIS.</p>
 
       <table class='simple'>
         <thead>
@@ -745,7 +755,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p class='note'>The Hypothetical Render Model defines a one-to-one mapping between <a>characters</a> and <a>glyphs</a>
       (using the definition of glyph from this document).
-      While a one-to-one mapping between <a>code points</a> and glyphs (using the definition of glyph from [[i18n-glossary]])
+      While a one-to-one mapping between <a>code points</a> and glyphs (using the definition of glyph from [[?i18n-glossary]])
       is common in some scripts (such as the Latin script),
       the actual relationship is more complex.
       Some scripts, such as Arabic, use different glyphs for a given character,
@@ -757,13 +767,13 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </p>
 
       <p>For each <a>glyph</a> associated with a <a>character</a> in a <a>presented region</a> of <a>Intermediate Synchronic Document</a>
-      E<sub>n</sub>, the Presentation Compositor SHALL:</p>
+      E<sub>n</sub>, the Presentation Compositor:</p>
 
       <ul>
-        <li>if an identical <a>glyph</a> is present in Glyph Back Buffer, copy the <a>glyph</a> from Glyph Cache
+        <li>if an identical <a>glyph</a> is present in Glyph Back Buffer, copies the <a>glyph</a> from Glyph Cache
         to the Back Buffer using the Glyph Copier and flag the <a>glyph</a> as <i>retain</i>; or</li>
 
-        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Cache, and flag
+        <li>otherwise renders (using the Glyph Renderer) the <a>glyph</a> into the Back Buffer and Glyph Cache, and flags
         the <a>glyph</a> as <i>retain</i>.
         </li>
       </ul>
@@ -799,7 +809,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>GCpy is the normalized glyph copy performance factor.</li>
       </ul>
 
-      <p>The Normalized Rendered Glyph Area NRGA(g<sub>i</sub>) of a <a>glyph</a> g<sub>i</sub> SHALL be equal to:</p>
+      <p>The Normalized Rendered Glyph Area NRGA(g<sub>i</sub>) of a <a>glyph</a> g<sub>i</sub> is given by:</p>
 
       <p class="equation">NRGA(g<sub>i</sub>) = (fontSize of g<sub>i</sub> as percentage of <a>Root Container Region</a>
       height)<sup>2</sup></p>
