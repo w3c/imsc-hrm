@@ -684,12 +684,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, perform the following steps
       in order:</p>
       <ol>
-        <li>purge from the Decoded Image Cache all images not flagged <i>retain</i>; and</li>
+        <li>purge from the Decoded Image Cache all images not flagged <i>retain</i>;</li>
         <li>remove the <i>retain</i> flag from all remaining images; and</li>
       </ol>
 
-      <p>It SHALL be an <a>error</a> if the sum of Normalized Image Area images stored in Decoded Image Cache is
-      greater than the Normalized Decoded Image Cache Size (NDIBS).</p>
+      <p>It SHALL be an <a>error</a> if the sum of the Normalized Image Area over all images flagged <i>retain</i>
+      in the Decoded Image Cache is at any time greater than the Normalized Decoded Image Cache Size (NDIBS).</p>
 
       <p class="note">The abbreviation NDIBS reflects the name of the Decoded Image Cache from earlier editions of the
       specification.</p>
@@ -826,8 +826,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>remove the <i>retain</i> flag from all remaining <a>glyphs</a> in the Glyph Cache; and</li>
       </ol>
 
-      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> in the
-      Glyph Cache to be larger than the Normalized Glyph Cache Size (NGBS).</p>
+      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> flagged
+      <i>retain</i> in the Glyph Cache to be, at any time, larger than the Normalized Glyph Cache Size (NGBS).</p>
 
       <p class="note">The abbreviation NGBS reflects the name of the Glyph Cache from earlier editions of the
       specification.</p>
