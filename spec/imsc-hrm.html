@@ -192,8 +192,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     documents that conform to any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
-    model defines a glyph buffer for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
-    requires the implementation of such a buffer, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
+    model defines glyph cache for the purpose of modelling how the number of glyph drawing operations can be reduced, it neither
+    requires the implementation of such a cache, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
     that can be used to produce text output.</p>
 
     <p>Furthermore, the model is not intended to constrain readability complexity.</p>
@@ -455,11 +455,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>To enable scenarios where the same glyphs are used in multiple successive <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
-      [[CEA-608]] and [[CEA-708]]), the Glyph Buffers G<sub>n</sub> and G<sub>n-1</sub> store rendered glyphs across <a data-lt=
+      [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
       Buffer instead of rendered, a more costly operation.</p>
 
-      <p>Similarly, Decoded Image Buffers D<sub>n</sub> and D<sub>n-1</sub> store decoded images across <a data-lt=
+      <p>Similarly, a Decoded Image Cache stores decoded images across <a data-lt=
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
     </section>
@@ -645,16 +645,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>For each <dfn data-cite="IMSC#dfn-presented-image">presented image</dfn>, the Presentation Compositor either:</p>
 
       <ul>
-        <li>if an identical image is present in Decoded Image Buffer D<sub>n</sub>, copies the image from Decoded Image Buffer
-        D<sub>n</sub> to the Back Buffer using the Image Copier; or</li>
+        <li>if an identical image is present in the Decoded Image Cache, copies the image from the Decoded Image Cache
+        to the Back Buffer using the Image Copier and flag the image as <i>retain</i>; or</li>
 
-        <li>if an identical image is present in Decoded Image Buffer D<sub>n-1</sub>, i.e. an identical image was present in
-        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copies using the Image Copier the image from Decoded Image Buffer
-        D<sub>n-1</sub> to both the Decoded Image Buffer D<sub>n</sub> and the Back Buffer; or
-        </li>
-
-        <li>otherwise, decode the image, using the Image Decoder, into the Back Buffer and Decoded
-        Image Buffer D<sub>n</sub>.</li>
+        <li>otherwise, decodes the image, using the Image Decoder, into both the Back Buffer and the Decoded Image Cache,
+        and flags the image as <i>retain</i>.</li>
       </ul>
 
       <p>Two images are identical if and only if they reference the same encoded image source.</p>
@@ -686,14 +681,18 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>NSIZ(I<sub>i</sub>) is the number of pixels of <a>presented image</a> I<sub>i</sub>.</p>
 
-      <p>The contents of the Decoded Image Buffer D<sub>n</sub> are transferred instantaneously to Decoded Image Buffer
-      D<sub>n-1</sub> at the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
+      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, perform the following steps
+      in order:</p>
+      <ol>
+        <li>purge from the Decoded Image Cache all images not flagged <i>retain</i>;</li>
+        <li>remove the <i>retain</i> flag from all remaining images; and</li>
+      </ol>
 
-      <p>The total size occupied by images stored in Decoded Image Buffers D<sub>n</sub> or D<sub>n-1</sub> is the sum of
-      their Normalized Image Area.</p>
+      <p>It SHALL be an <a>error</a> if the sum of the Normalized Image Area over all images flagged <i>retain</i>
+      in the Decoded Image Cache is at any time greater than the Normalized Decoded Image Cache Size (NDIBS).</p>
 
-      <p>The size of Decoded Image Buffers D<sub>n</sub> or D<sub>n-1</sub> is the Normalized Decoded Image Buffer Size
-      (NDIBS).</p>
+      <p class="note">The abbreviation NDIBS reflects the name of the Decoded Image Cache from earlier editions of the
+      specification.</p>
 
       <p>The following table specifies the values of ICpy, IDec, and NDBIS.</p>
 
@@ -720,7 +719,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <td>Normalized Decoded Image Buffer Size (NDIBS)</td>
+            <td>Normalized Decoded Image Cache Size (NDIBS)</td>
 
             <td>0.9885</td>
           </tr>
@@ -764,7 +763,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       depending on its position in a word.
       Some scripts require combining marks or use a sequence of code points to form a glyph.
       Cases exist where a given sequence of code points can have different glyph representations depending on context.
-      This complexity is accounted for by reducing the performance of the glyph buffer
+      This complexity is accounted for by reducing the performance of the Glyph Cache
       for scripts where a one-to-one mapping is not the general rule (see GCpy below).
       </p>
 
@@ -772,17 +771,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       E<sub>n</sub>, the Presentation Compositor:</p>
 
       <ul>
-        <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n</sub>, copies the <a>glyph</a> from Glyph Buffer
-        G<sub>n</sub> to the Back Buffer using the Glyph Copier; or
-        </li>
+        <li>if an identical <a>glyph</a> is present in the Glyph Cache, copies the <a>glyph</a> from Glyph Cache
+        to the Back Buffer using the Glyph Copier and flag the <a>glyph</a> as <i>retain</i>; or</li>
 
-        <li>if an identical <a>glyph</a> is present in Glyph Buffer G<sub>n-1</sub>, i.e. an identical <a>glyph</a> was present in
-        <a>Intermediate Synchronic Document</a> E<sub>n-1</sub>, copies using the Glyph Copier the <a>glyph</a> from Glyph Buffer
-        G<sub>n-1</sub> to both the Glyph Buffer G<sub>n</sub> and the Back Buffer; or
-        </li>
-
-        <li>otherwise render using the Glyph Renderer the <a>glyph</a> into the Back Buffer and Glyph Buffer
-        G<sub>n</sub>.
+        <li>otherwise renders (using the Glyph Renderer) the <a>glyph</a> into the Back Buffer and Glyph Cache, and flags
+        the <a>glyph</a> as <i>retain</i>.
         </li>
       </ul>
 
@@ -823,14 +816,21 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       height)<sup>2</sup></p>
 
       <p class='note'>NRGA(G<sub>i</sub>) does not take into account decorations (e.g. underline), effects (e.g. outline) or actual
-      typographical glyph aspect ratio. An implementation can determine an actual buffer size needs based on worst-case glyph size
+      typographical glyph aspect ratio. An implementation can determine an actual cache size needs based on worst-case glyph size
       complexity.</p>
 
-      <p>The contents of the Glyph Buffer G<sub>n</sub> are copied instantaneously to Glyph Buffer G<sub>n-1</sub> at the
-      presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
+      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, perform the following steps in
+      order:</p>
+      <ol>
+        <li>purge from the Glyph Cache all <a>glyphs</a> not flagged <i>retain</i>; and</li>
+        <li>remove the <i>retain</i> flag from all remaining <a>glyphs</a> in the Glyph Cache; and</li>
+      </ol>
 
-      <p>It SHALL be an <a>error</a> for the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> Glyph
-      Buffer G<sub>n</sub> to be larger than the Normalized Glyph Buffer Size (NGBS).</p>
+      <p>It SHALL be an <a>error</a> if the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> flagged
+      <i>retain</i> in the Glyph Cache is at any time larger than the Normalized Glyph Cache Size (NGBS).</p>
+
+      <p class="note">The abbreviation NGBS reflects the name of the Glyph Cache from earlier editions of the
+      specification.</p>
 
       <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
 
@@ -883,7 +883,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <th colspan="2">Normalized Glyph Buffer Size (NGBS)</th>
+            <th colspan="2">Normalized Glyph Cache Size (NGBS)</th>
           </tr>
 
           <tr>
@@ -905,7 +905,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         "glyph">glyphs</a> present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
         maximum Normalized Glyph Buffer Size of 1 and the default <code>tts:fontSize</code> of <code>1c</code> are used,
         the font size relative to the
-        <a>Root Container Region</a> height is 1/15 , and the maximum number of distinct glyphs that can be buffered is
+        <a>Root Container Region</a> height is 1/15 , and the maximum number of distinct glyphs that can be cached is
         1÷(1÷15)<sup>2</sup>=225 glyphs.
       </aside>
 
