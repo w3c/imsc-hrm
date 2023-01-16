@@ -192,7 +192,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     documents that conform to any of the TTML Profiles for Internet Media Subtitles and Captions ([[IMSC]]).</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
-    model defines glyph cache for the purpose of limiting the number of glyphs displayed at any given point in time, it neither
+    model defines glyph cache for the purpose of modelling how the number of glyph drawing operations can be reduced, it neither
     requires the implementation of such a cache, nor models the sub-pixel glyph positioning and anti-aliased glyph rendering
     that can be used to produce text output.</p>
 
@@ -681,7 +681,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>NSIZ(I<sub>i</sub>) is the number of pixels of <a>presented image</a> I<sub>i</sub>.</p>
 
-      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>:</p>
+      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, perform the following steps
+      in order:</p>
       <ol>
         <li>purge from the Decoded Image Cache all images not flagged <i>retain</i>; and</li>
         <li>remove the <i>retain</i> flag from all remaining images; and</li>
@@ -770,7 +771,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       E<sub>n</sub>, the Presentation Compositor:</p>
 
       <ul>
-        <li>if an identical <a>glyph</a> is present in Glyph Back Buffer, copies the <a>glyph</a> from Glyph Cache
+        <li>if an identical <a>glyph</a> is present in the Glyph Cache, copies the <a>glyph</a> from Glyph Cache
         to the Back Buffer using the Glyph Copier and flag the <a>glyph</a> as <i>retain</i>; or</li>
 
         <li>otherwise renders (using the Glyph Renderer) the <a>glyph</a> into the Back Buffer and Glyph Cache, and flags
@@ -818,7 +819,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       typographical glyph aspect ratio. An implementation can determine an actual cache size needs based on worst-case glyph size
       complexity.</p>
 
-      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>:</p>
+      <p>At the presentation time of <a>Intermediate Synchronic Document</a> E<sub>n</sub>, perform the following steps in
+      order:</p>
       <ol>
         <li>purge from the Glyph Cache all <a>glyphs</a> not flagged <i>retain</i>; and</li>
         <li>remove the <i>retain</i> flag from all remaining <a>glyphs</a> in the Glyph Cache; and</li>
