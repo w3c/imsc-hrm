@@ -11,16 +11,16 @@ figure img {
     }
   </style>
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
-</script>
   <script class='remove'>
 var respecConfig = {
-                    specStatus:   "WD"
+                    specStatus:   "CR"
                 //,   processVersion: "2018"
                 //,   previousMaturity: "PR"
-                //,   publishDate: "2021-11-09"
+                ,   publishDate: "2023-06-22"
                 //,   modificationDate: "2020-04-27"
                 //,   errata: ""
-                //,   implementationReportURI: ""
+                ,   crEnd: "2023-07-20"
+                ,   implementationReportURI: "https://www.w3.org/wiki/TimedText/IMSC-HRM-1ED-Implementation-Report"
                 ,   sotdAfterWGinfo: "true"
                 //,   previousPublishDate: "2018-10-04"
                 ,   shortName:    "imsc-hrm"
@@ -198,9 +198,21 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
     <p>Furthermore, the model is not intended to constrain readability complexity.</p>
   </section>
-
   <section id='sotd'>
-   
+    <p>For this specification to exit the CR stage, one of the following minimum
+      combinations of independent factors of verifications SHALL be demonstrated:</p>
+      <ul>
+        <li>at least 1 content producing implementation and at least 1 validating implementation; or</li>
+        <li>at least 2 independent validating implementations.</li>
+      </ul>
+      <p>The Working Group has identified the following <dfn data-cite="w3c-process/#at-risk">at
+      risk</dfn> features:</p>
+
+      <div class="issue" data-number="63"></div>
+
+      <p><a>At risk</a> features may be be removed before advancement to Proposed Recommendation.</p>
+
+      <p>The history of substantive changes made to this document is summarized at <a href="#substantive-changes-summary"></a>.
   </section>
 
   <section id='scope'>
@@ -463,6 +475,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
 
+      <div class="issue" data-number="63"></div>
+
       <p>Each of the terms <a>Presentation Compositor</a>, Glyph Renderer, Glyph Copier, Image Decoder, and Image Copier
       is defined by the algorithmic requirements defined for it in this specification.</p>
     </section>
@@ -537,7 +551,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>DUR<sub>I</sub>(E<sub>n</sub>) is the duration, in seconds, for painting the image subtitle content for <a>Intermediate
         Synchronic Document</a> E<sub>n</sub>, as specified in Section <a href="#paint-images">.</a>
         </li>
+
       </ul>
+
+      <div class="issue" data-number="63"></div>
 
       <p>The contents of the Back Buffer are transferred instantaneously to the Front Buffer at the presentation
       time of a <a>non-empty ISD</a> E<sub>n</sub>, making the latter available for display.</p>
@@ -641,6 +658,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
     <section id='paint-images'>
       <h2>Paint Images</h2>
+
+      <div class="issue" data-number="63"></div>
 
       <p>The <a>Presentation Compositor</a> paints into the Back Buffer all visible pixels of <a>presented
       images</a> of <a>Intermediate Synchronic Document</a> E<sub>n</sub>.</p>
@@ -1004,18 +1023,35 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <h2>Summary of substantive changes</h2>
 
     <section>
-      <h3>Reduce empty ISD complexity to zero</h3>
-      <p>In order to allow short (less than 100 ms) gaps between subtitles, which is common practice, the complexity of
-      presenting <a>empty ISDs</a> has been reduced to zero: instead of being drawn into the Back Buffer, an <a>empty
-      ISD</a> merely disconnects the Front Buffer from the display while it is presented.</p>
+      <h3>Changes since the <a href="https://www.w3.org/TR/2021/WD-imsc-hrm-20211109/">First Public Working
+      Draft</a></h3>
+      <dl>
+        <dt>Reduced complexity of empty ISD to zero</dt>
+        <dd>
+          <p>In order to allow short (less than 100 ms) gaps between subtitles, which is common practice, the complexity
+          of presenting <a>empty ISDs</a> has been reduced to zero: instead of being drawn into the Back Buffer, an
+          <a>empty ISD</a> merely disconnects the Front Buffer from the display while it is presented.</p>
+          <p>Details at: <a href="https://github.com/w3c/imsc-hrm/issues/49">https://github.com/w3c/imsc-hrm/issues/49</a>
+          </p>
+        </dd>
+        <dt>Applied complexity of clearing the Back Buffer to all non-empty ISDs</dt>
+        <dd>
+          <p>The first <a>Intermediate Synchronic Document</a> is no longer treated differently and incurs a cost for
+          clearing the Back Buffer.</p>
+          <p>Details at: <a
+          href="https://github.com/w3c/imsc-hrm/issues/49">https://github.com/w3c/imsc-hrm/issues/49</a></p>
+        </dd>
+        <dt>Clarified the mapping between <i>Text rendering performance factor</i> values and script values</dt>
+        <dd>
+          <p>Details at: <a
+          href="https://github.com/w3c/imsc-hrm/issues/38">https://github.com/w3c/imsc-hrm/issues/38</a></p>
+        </dd>
+        <dt>Fixed an incorrect script value in the specification of <i>GCpy</i></dt>
+        <dd>
+          <p>Details at: <a href="https://github.com/w3c/imsc-hrm/issues/39">https://github.com/w3c/imsc-hrm/issues/39</a></p>
+        </dd>
+      </dl>
     </section>
-
-    <section>
-      <h3>Complexity of clearing the Back Buffer applies to all non-empty ISDs</h3>
-      <p>The first <a>Intermediate Synchronic Document</a> is no longer treated differently and incurs a cost for
-      clearing the Back Buffer.</p>
-    </section>
-
   </section>
 </body>
 </html>
