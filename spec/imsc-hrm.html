@@ -826,11 +826,11 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>where</p>
 
       <ul>
-        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Back Buffer
+        <li>&#x393;<sub>r</sub> is the set of <a>glyphs</a> rendered into the Back Buffer
         using the Glyph Renderer in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
-        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Back Buffer using
+        <li>&#x393;<sub>c</sub> is the set of <a>glyphs</a> copied to the Back Buffer using
         the Glyph Copier in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
@@ -856,7 +856,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>remove the <i>retain</i> flag from all remaining <a>glyphs</a> in the Glyph Cache; and</li>
       </ol>
 
-      <p>It SHALL be an <a>error</a> if the sum of <a>NRGA(g<sub>i</sub>)</a> over all <a data-lt="glyph">glyphs</a> flagged
+      <p>It SHALL be an <a>error</a> if the sum of <a>NRGA(g<sub>i</sub>)</a> over all <a>glyphs</a> flagged
       <i>retain</i> in the Glyph Cache is at any time larger than the Normalized Glyph Cache Size (<a>NGBS</a>).</p>
 
       <p class="note">The abbreviation NGBS reflects the name of the Glyph Cache from earlier editions of the
@@ -943,7 +943,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <a>GCpy</a> effectively sets a limit on animating text. For example, assuming that the <a>Root Container Region</a> is ultimately
         rendered at 1920×1080 resolution and no regions need to have background color painted (so only a CLEAR(E<sub>n</sub>)
         operation is required for the normalized drawing area for the <a>Intermediate Synchronic Document</a>), a <a>GCpy</a> and <a>BDraw</a> of
-        12 s<sup>-1</sup> would mean that a group of 160 <a data-lt="glyph">glyphs</a> with a <code>tts:fontSize</code> equal to 5% of the
+        12 s<sup>-1</sup> would mean that a group of 160 <a>glyphs</a> with a <code>tts:fontSize</code> equal to 5% of the
         <a>Root Container Region</a> height could be moved at most approximately 12 s<sup>-1</sup> ÷ (1 + ( 160 ×
         0.05<sup>2</sup> )) = 8.6 times per second.
       </aside>
@@ -951,7 +951,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <aside class='example'>
         <a>Ren</a>(G<sub>i</sub>) effectively sets a limit on the text rendering rate. For example, assuming that the <a>Root Container
         Region</a> is ultimately rendered at a 1920×1080 resolution, a <a>Ren</a>(G<sub>i</sub>) of 1.2 s<sup>-1</sup> would mean that at
-        most 120 <a data-lt="glyph">glyphs</a> with a fontSize of 108 px (10% of 1080 px and <a>NRGA(g<sub>i</sub>)</a> = 0.01) could be
+        most 120 <a>glyphs</a> with a fontSize of 108 px (10% of 1080 px and <a>NRGA(g<sub>i</sub>)</a> = 0.01) could be
         rendered every second.
       </aside>
     </section>
