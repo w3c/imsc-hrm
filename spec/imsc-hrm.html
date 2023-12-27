@@ -540,8 +540,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the
       Back Buffer is given by:</p>
 
-      <p class="equation">DUR(E<sub>n</sub>) = <a>S</a>(E<sub>n</sub>) / <a>BDraw</a> + <a>DUR<sub>T</sub></a>(E<sub>n</sub>) +
-      <a>DUR<sub>I</sub></a>(E<sub>n</sub>)</p>
+      <p class="equation">DUR(E<sub>n</sub>) = S(E<sub>n</sub>) / BDraw + DUR<sub>T</sub>(E<sub>n</sub>) +
+      DUR<sub>I</sub>(E<sub>n</sub>)</p>
 
       <p>where</p>
 
@@ -618,7 +618,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>The total normalized drawing area <dfn>S</dfn>(E<sub>n</sub>) for <a>Intermediate Synchronic Document</a> E<sub>n</sub> is given by:</p>
 
-      <p class="equation">S(E<sub>n</sub>) = <a>CLEAR</a>(E<sub>n</sub>) + <a>PAINT</a>(E<sub>n</sub> )</p>
+      <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
 
       <p>where <dfn>CLEAR</dfn>(E<sub>n</sub>) = 1.</p>
 
@@ -628,7 +628,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p><dfn>PAINT</dfn>(E<sub>n</sub>) is the normalized area to be painted for all regions that are used in <a>Intermediate
       Synchronic Document</a> E<sub>n</sub> according to:</p>
 
-      <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> <a>NSIZE</a>(R<sub>i</sub>) ∙
+      <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> NSIZE(R<sub>i</sub>) ∙
       <a>NBG</a>(R<sub>i</sub>)</p>
 
       <p>where R<sub>p</sub> is the set of <a data-lt="presented region">presented regions</a> in the <a>Intermediate Synchronic
@@ -687,7 +687,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The duration <dfn>DUR<sub>I</sub></dfn>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
       E<sub>n</sub> in the Back Buffer is given by:</p>
 
-      <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> <a>NRGA(I<sub>i</sub>)</a> / ICpy
+      <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> NRGA(I<sub>i</sub>) / ICpy
       + ∑<sub>I<sub>j</sub> ∈ I<sub>d</sub></sub> NSIZ(I<sub>j</sub>) / IDec</p>
 
       <p>where</p>
@@ -820,8 +820,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The duration <dfn>DUR<sub>T</sub></dfn>(E<sub>n</sub>) for rendering the text of an <a>Intermediate Synchronic Document</a>
       E<sub>n</sub> in the Back Buffer is as follows:</p>
 
-      <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> <a>NRGA(g<sub>i</sub>)</a>
-      / <a>Ren</a>(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> <a>NRGA(g<sub>j</sub>)</a> / <a>GCpy</a></p>
+      <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> NRGA(g<sub>i</sub>)
+      / Ren(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> NRGA(g<sub>j</sub>) / GCpy</p>
 
       <p>where</p>
 
