@@ -465,10 +465,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <dfn data-cite="IMSC#dfn-related-video-object">Related Video Object</dfn>
       resolution.</p>
 
-      <p>To enable scenarios where the same glyphs are used in multiple successive <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
-      [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
+      <p>To enable scenarios where the same glyphs are used in multiple successive <a>Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
+      [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a>Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
       Buffer instead of rendered, a more costly operation.</p>
 
       <p class="note">The HRM permits a maximum rate of 12 <a>Intermediate Synchronic Documents</a> per second. This is
@@ -479,8 +477,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       groupings, such as words, phrases, complete lines or paragraphs before creating an <a>IMSC Document Instance</a>,
       and let the <a>presentation processor</a> perform any desired animation, e.g., typewriter effect.</p>
 
-      <p>Similarly, a Decoded Image Cache stores decoded images across <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
+      <p>Similarly, a Decoded Image Cache stores decoded images across <a>Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
 
       <div class="issue" data-number="63"></div>
@@ -631,7 +628,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> <a>NSIZE</a>(R<sub>i</sub>) ∙
       <a>NBG</a>(R<sub>i</sub>)</p>
 
-      <p>where R<sub>p</sub> is the set of <a data-lt="presented region">presented regions</a> in the <a>Intermediate Synchronic
+      <p>where R<sub>p</sub> is the set of <a>presented regions</a> in the <a>Intermediate Synchronic
       Document</a> E<sub>n</sub>.</p>
 
       <p><dfn>NSIZE</dfn>(R<sub>i</sub>) is given by:</p>
@@ -931,8 +928,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </p>
 
       <aside class='example'>
-        Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
-        "glyph">glyphs</a> present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
+        Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct
+        <a>glyphs</a>  present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
         maximum Normalized Glyph Buffer Size of 1 and the default <code>tts:fontSize</code> of <code>1c</code> are used,
         the font size relative to the
         <a>Root Container Region</a> height is 1/15 , and the maximum number of distinct glyphs that can be cached is
