@@ -465,22 +465,19 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <dfn data-cite="IMSC#dfn-related-video-object">Related Video Object</dfn>
       resolution.</p>
 
-      <p>To enable scenarios where the same glyphs are used in multiple successive <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
-      [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
+      <p>To enable scenarios where the same glyphs are used in multiple successive <a>Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
+      [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a>Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
       Buffer instead of rendered, a more costly operation.</p>
 
       <p class="note">The HRM permits a maximum rate of 12 <a>Intermediate Synchronic Documents</a> per second. This is
-      ultimately limited by the BDraw parameter and is intended to capture processing and presentation overhead. When
+      ultimately limited by the <a>BDraw</a> parameter and is intended to capture processing and presentation overhead. When
       converting a [[CEA-608]] signal to IMSC, it is therefore impossible to create <a>IMSC Document Instances</a> that
       generate an <a>Intermediate Synchronic Document</a> for every [[CEA-608]] packet, which are sampled at
       the video field rate. It is instead preferable to coalesce sequences of [[CEA-608]] packets into longer
       groupings, such as words, phrases, complete lines or paragraphs before creating an <a>IMSC Document Instance</a>,
       and let the <a>presentation processor</a> perform any desired animation, e.g., typewriter effect.</p>
 
-      <p>Similarly, a Decoded Image Cache stores decoded images across <a data-lt=
-      "Intermediate Synchronic Document">Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
+      <p>Similarly, a Decoded Image Cache stores decoded images across <a>Intermediate Synchronic Documents</a>, allowing images to be copied into the Presentation
       Buffer instead of decoded.</p>
 
       <div class="issue" data-number="63"></div>
@@ -540,23 +537,23 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>The duration DUR(E<sub>n</sub>) for painting an <a>Intermediate Synchronic Document</a> E<sub>n</sub> in the
       Back Buffer is given by:</p>
 
-      <p class="equation">DUR(E<sub>n</sub>) = S(E<sub>n</sub>) / BDraw + DUR<sub>T</sub>(E<sub>n</sub>) +
-      DUR<sub>I</sub>(E<sub>n</sub>)</p>
+      <p class="equation">DUR(E<sub>n</sub>) = <a>S</a>(E<sub>n</sub>) / <a>BDraw</a> + <a>DUR<sub>T</sub></a>(E<sub>n</sub>) +
+      <a>DUR<sub>I</sub></a>(E<sub>n</sub>)</p>
 
       <p>where</p>
 
       <ul>
-        <li>S(E<sub>n</sub>) is the total normalized drawing area for <a>Intermediate Synchronic Document</a> E<sub>n</sub>, as
+        <li><a>S</a>(E<sub>n</sub>) is the total normalized drawing area for <a>Intermediate Synchronic Document</a> E<sub>n</sub>, as
         specified in <a href="#paint-regions"></a>;
         </li>
 
-        <li>BDraw is the normalized background drawing performance factor;</li>
+        <li><a>BDraw</a> is the normalized background drawing performance factor;</li>
 
-        <li>DUR<sub>T</sub>(E<sub>n</sub>) is the duration, in seconds, for painting the text subtitle content for <a>Intermediate
+        <li><a>DUR<sub>T</sub></a>(E<sub>n</sub>) is the duration, in seconds, for painting the text subtitle content for <a>Intermediate
         Synchronic Document</a> E<sub>n</sub>, as specified in Section <a href="#paint-text"></a>; and
         </li>
 
-        <li>DUR<sub>I</sub>(E<sub>n</sub>) is the duration, in seconds, for painting the image subtitle content for <a>Intermediate
+        <li><a>DUR<sub>I</sub></a>(E<sub>n</sub>) is the duration, in seconds, for painting the image subtitle content for <a>Intermediate
         Synchronic Document</a> E<sub>n</sub>, as specified in Section <a href="#paint-images">.</a>
         </li>
 
@@ -580,7 +577,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>It SHALL be an <a>error</a> for the <a>Presentation Compositor</a> to fail to complete painting pixels for
       <a>non-empty ISD</a> E<sub>n</sub> before its presentation time.</p>
 
-      <p>The following table specifies the values of <a>IPD</a> and BDraw.</p>
+      <p>The following table specifies the values of <a>IPD</a> and <a>BDraw</a>.</p>
 
       <table class='simple'>
         <thead>
@@ -599,15 +596,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <td>Normalized background drawing performance factor (BDraw)</td>
+            <td><dfn data-lt="BDraw">Normalized background drawing performance factor</dfn> (BDraw)</td>
 
             <td>12 s<sup>-1</sup></td>
           </tr>
         </tbody>
       </table>
 
-      <p class='note'>BDraw effectively sets a limit on fillings regions - for example, assuming that the <a>Root Container
-      Region</a> is ultimately rendered at 1920×1080 resolution, a BDraw of 12 s<sup>-1</sup> would correspond to a fill rate of
+      <p class='note'><a>BDraw</a> effectively sets a limit on fillings regions - for example, assuming that the <a>Root Container
+      Region</a> is ultimately rendered at 1920×1080 resolution, a <a>BDraw</a> of 12 s<sup>-1</sup> would correspond to a fill rate of
       1920×1080×12/s=23.7×2<sup>20</sup>pixels s<sup>-1</sup>.</p>
 
       <p class='note'><a>IPD</a> effectively sets a limit on the complexity of any given <a>Intermediate Synchronic Document</a>.</p>
@@ -616,35 +613,35 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='paint-regions'>
       <h2>Paint Regions</h2>
 
-      <p>The total normalized drawing area S(E<sub>n</sub>) for <a>Intermediate Synchronic Document</a> E<sub>n</sub> is given by:</p>
+      <p>The total normalized drawing area <dfn>S</dfn>(E<sub>n</sub>) for <a>Intermediate Synchronic Document</a> E<sub>n</sub> is given by:</p>
 
-      <p class="equation">S(E<sub>n</sub>) = CLEAR(E<sub>n</sub>) + PAINT(E<sub>n</sub> )</p>
+      <p class="equation">S(E<sub>n</sub>) = <a>CLEAR</a>(E<sub>n</sub>) + <a>PAINT</a>(E<sub>n</sub> )</p>
 
-      <p>where CLEAR(E<sub>n</sub>) = 1.</p>
+      <p>where <dfn>CLEAR</dfn>(E<sub>n</sub>) = 1.</p>
 
       <p class='note'>To ensure consistency of the Back Buffer, a new <a>Intermediate Synchronic Document</a> requires
       clearing of the <a>Root Container Region</a>.</p>
 
-      <p>PAINT(E<sub>n</sub>) is the normalized area to be painted for all regions that are used in <a>Intermediate
+      <p><dfn>PAINT</dfn>(E<sub>n</sub>) is the normalized area to be painted for all regions that are used in <a>Intermediate
       Synchronic Document</a> E<sub>n</sub> according to:</p>
 
-      <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> NSIZE(R<sub>i</sub>) ∙
-      NBG(R<sub>i</sub>)</p>
+      <p class="equation">PAINT(E<sub>n</sub>) = ∑<sub>R<sub>i</sub>∈R<sub>p</sub></sub> <a>NSIZE</a>(R<sub>i</sub>) ∙
+      <a>NBG</a>(R<sub>i</sub>)</p>
 
-      <p>where R<sub>p</sub> is the set of <a data-lt="presented region">presented regions</a> in the <a>Intermediate Synchronic
+      <p>where R<sub>p</sub> is the set of <a>presented regions</a> in the <a>Intermediate Synchronic
       Document</a> E<sub>n</sub>.</p>
 
-      <p>NSIZE(R<sub>i</sub>) is given by:</p>
+      <p><dfn>NSIZE</dfn>(R<sub>i</sub>) is given by:</p>
 
       <p class="equation">NSIZE(R<sub>i</sub>) = (width of R<sub>i</sub> ∙ height of R<sub>i</sub> ) ÷ (<a>Root Container
       Region</a> height ∙ <a>Root Container Region</a> width)</p>
 
       <aside class='example'>
         For a region R<sub>i</sub> in with <code>tts:extent="250px 50px"</code> within a <a>Root Container Region</a> with
-        <code>tts:extent="1920px 1080px"</code>, NSIZE(R<sub>i</sub>) ≈ 0.00603.
+        <code>tts:extent="1920px 1080px"</code>, <a>NSIZE</a>(R<sub>i</sub>) ≈ 0.00603.
       </aside>
 
-      <p>NBG(R<sub>i</sub>) is the total number of elements within the tree rooted at region R<sub>i</sub> that satisfy the following criteria:</p>
+      <p><dfn>NBG</dfn>(R<sub>i</sub>) is the total number of elements within the tree rooted at region R<sub>i</sub> that satisfy the following criteria:</p>
 
       <ul>
         <li>the element is either a <code>region</code>, <code>body</code>, <code>div</code>, <code>p</code> or 
@@ -656,9 +653,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p class="issue" data-number="5"></p>
 
       <p class="note">An element and its parent that satisfy the criteria above and share identical computed values of
-      <code>tts:backgroundColor</code> are counted as two distinct elements for the purpose of computing NBG(R<sub>i</sub>).</p>
+      <code>tts:backgroundColor</code> are counted as two distinct elements for the purpose of computing <a>NBG</a>(R<sub>i</sub>).</p>
 
-      <p class="note">The <code>set</code> element is not included in the computation of NBG(R<sub>i</sub>). While it can affect the
+      <p class="note">The <code>set</code> element is not included in the computation of <a>NBG</a>(R<sub>i</sub>). While it can affect the
       computed values of <code>tts:backgroundColor</code>, it is removed during <a>Intermediate Synchronic Document</a>
       construction.</p>
   
@@ -684,10 +681,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
       <p>Two images are identical if and only if they reference the same encoded image source.</p>
 
-      <p>The duration DUR<sub>I</sub>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
+      <p>The duration <dfn>DUR<sub>I</sub></dfn>(E<sub>n</sub>) for painting images of an <a>Intermediate Synchronic Document</a>
       E<sub>n</sub> in the Back Buffer is given by:</p>
 
-      <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> NRGA(I<sub>i</sub>) / ICpy
+      <p class="equation">DUR<sub>I</sub>(E<sub>n</sub>) = ∑<sub>I<sub>i</sub> ∈ I<sub>c</sub></sub> <a>NRGA(I<sub>i</sub>)</a> / ICpy
       + ∑<sub>I<sub>j</sub> ∈ I<sub>d</sub></sub> NSIZ(I<sub>j</sub>) / IDec</p>
 
       <p>where</p>
@@ -704,7 +701,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>ICpy is the normalized image copy performance factor.</li>
       </ul>
 
-      <p>NRGA(I<sub>i</sub>) is the Normalized Image Area of <a>presented image</a> I<sub>i</sub> and is given by:</p>
+      <p><dfn>NRGA(I<sub>i</sub>)</dfn> is the Normalized Image Area of <a>presented image</a> I<sub>i</sub> and is given by:</p>
 
       <p class="equation">NRGA(I<sub>i</sub>)= (width of I<sub>i</sub> ∙ height of I<sub>i</sub> ) ÷ ( <a>Root Container
       Region</a> height ∙ <a>Root Container Region</a> width )</p>
@@ -794,7 +791,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       Some scripts require combining marks or use a sequence of code points to form a glyph.
       Cases exist where a given sequence of code points can have different glyph representations depending on context.
       This complexity is accounted for by reducing the performance of the Glyph Cache
-      for scripts where a one-to-one mapping is not the general rule (see GCpy below).
+      for scripts where a one-to-one mapping is not the general rule (see <a>GCpy</a> below).
       </p>
 
       <p>Iterating through each <a>character</a> in the character content of each <a>presented region</a> of <a>Intermediate Synchronic Document</a>
@@ -817,35 +814,35 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </figcaption>
       </figure>
 
-      <p>The duration DUR<sub>T</sub>(E<sub>n</sub>) for rendering the text of an <a>Intermediate Synchronic Document</a>
+      <p>The duration <dfn>DUR<sub>T</sub></dfn>(E<sub>n</sub>) for rendering the text of an <a>Intermediate Synchronic Document</a>
       E<sub>n</sub> in the Back Buffer is as follows:</p>
 
-      <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> NRGA(g<sub>i</sub>)
-      / Ren(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> NRGA(g<sub>j</sub>) / GCpy</p>
+      <p class="equation">DUR<sub>T</sub>(E<sub>n</sub>) = ∑<sub>g<sub>i</sub> ∈ &#x393;<sub>r</sub></sub> <a>NRGA(g<sub>i</sub>)</a>
+      / <a>Ren</a>(g<sub>i</sub>) + ∑<sub>g<sub>j</sub> ∈ &#x393;<sub>c</sub></sub> <a>NRGA(g<sub>j</sub>)</a> / <a>GCpy</a></p>
 
       <p>where</p>
 
       <ul>
-        <li>&#x393;<sub>r</sub> is the set of <a data-lt="glyph">glyphs</a> rendered into the Back Buffer
+        <li>&#x393;<sub>r</sub> is the set of <a>glyphs</a> rendered into the Back Buffer
         using the Glyph Renderer in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
-        <li>&#x393;<sub>c</sub> is the set of <a data-lt="glyph">glyphs</a> copied to the Back Buffer using
+        <li>&#x393;<sub>c</sub> is the set of <a>glyphs</a> copied to the Back Buffer using
         the Glyph Copier in <a>Intermediate Synchronic Document</a> E<sub>n</sub>;
         </li>
 
-        <li>Ren(g<sub>i</sub>) is the text rendering performance factor for <a>glyph</a> g<sub>i</sub>; and
+        <li><a>Ren</a>(g<sub>i</sub>) is the text rendering performance factor for <a>glyph</a> g<sub>i</sub>; and
         </li>
 
-        <li>GCpy is the normalized glyph copy performance factor.</li>
+        <li><a>GCpy</a> is the normalized glyph copy performance factor.</li>
       </ul>
 
-      <p>The Normalized Rendered Glyph Area NRGA(g<sub>i</sub>) of a <a>glyph</a> g<sub>i</sub> is given by:</p>
+      <p>The Rendered Glyph Area <dfn data-lt="NRGA(gj)">NRGA(g<sub>i</sub>)</dfn> of a <a>glyph</a> g<sub>i</sub> is given by:</p>
 
       <p class="equation">NRGA(g<sub>i</sub>) = (fontSize of g<sub>i</sub> as a decimal fraction of <a>Root Container Region</a>
       height)<sup>2</sup></p>
 
-      <p class='note'>NRGA(G<sub>i</sub>) does not take into account decorations (e.g. underline), effects (e.g. outline) or actual
+      <p class='note'><a>NRGA(g<sub>i</sub>)</a> does not take into account decorations (e.g. underline), effects (e.g. outline) or actual
       typographical glyph aspect ratio. An implementation can determine an actual cache size needs based on worst-case glyph size
       complexity.</p>
 
@@ -856,18 +853,18 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         <li>remove the <i>retain</i> flag from all remaining <a>glyphs</a> in the Glyph Cache; and</li>
       </ol>
 
-      <p>It SHALL be an <a>error</a> if the sum of NRGA(g<sub>i</sub>) over all <a data-lt="glyph">glyphs</a> flagged
-      <i>retain</i> in the Glyph Cache is at any time larger than the Normalized Glyph Cache Size (NGBS).</p>
+      <p>It SHALL be an <a>error</a> if the sum of <a>NRGA(g<sub>i</sub>)</a> over all <a>glyphs</a> flagged
+      <i>retain</i> in the Glyph Cache is at any time larger than the Normalized Glyph Cache Size (<a>NGBS</a>).</p>
 
       <p class="note">The abbreviation NGBS reflects the name of the Glyph Cache from earlier editions of the
       specification.</p>
 
-      <p>Unless specified otherwise, the following table specifies values of GCpy, Ren and NGBS.</p>
+      <p>Unless specified otherwise, the following table specifies values of <a>GCpy</a>, <a>Ren</a> and <a>NGBS</a>.</p>
 
       <table class='simple'>
         <tbody>
           <tr>
-            <th colspan="2">Normalized glyph copy performance factor (GCpy)</th>
+            <th colspan="2"><dfn data-lt="GCpy">Normalized glyph copy performance factor (GCpy)</dfn></th>
           </tr>
 
           <tr>
@@ -890,7 +887,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <th colspan="2">Text rendering performance factor Ren(G<sub>i</sub>)</th>
+            <th colspan="2"><dfn data-lt="Ren">Text rendering performance factor Ren(G<sub>i</sub>)</dfn></th>
           </tr>
 
           <tr>
@@ -913,7 +910,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           </tr>
 
           <tr>
-            <th colspan="2">Normalized Glyph Cache Size (NGBS)</th>
+            <th colspan="2"><dfn data-lt="NGBS">Normalized Glyph Cache Size (NGBS)</dfn></th>
           </tr>
 
           <tr>
@@ -922,7 +919,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>While DUR<sub>T</sub>(E<sub>n</sub>) is not affected, the choice of font by the <dfn
+      <p class='note'>While <a>DUR<sub>T</sub></a>(E<sub>n</sub>) is not affected, the choice of font by the <dfn
       data-cite="ttml2#terms-presentation-processor">presentation processor</dfn> can increase actual rendering
       complexity at time of presentation. For instance, a cursive font might select different glyphs for a given <a
       data-cite="i18n-glossary#dfn-grapheme">grapheme</a> (in order to maintain joining or for the start/end of the
@@ -931,8 +928,8 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </p>
 
       <aside class='example'>
-        Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct <a data-lt=
-        "glyph">glyphs</a> present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
+        Setting a Normalized Glyph Buffer Size effectively sets a limit on the total number of distinct
+        <a>glyphs</a>  present in any given <a>Intermediate Synchronic Document</a> E<sub>n</sub>. For example, assuming a
         maximum Normalized Glyph Buffer Size of 1 and the default <code>tts:fontSize</code> of <code>1c</code> are used,
         the font size relative to the
         <a>Root Container Region</a> height is 1/15 , and the maximum number of distinct glyphs that can be cached is
@@ -940,23 +937,27 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       </aside>
 
       <aside class='example'>
-        GCpy effectively sets a limit on animating text. For example, assuming that the <a>Root Container Region</a> is ultimately
-        rendered at 1920×1080 resolution and no regions need to have background color painted (so only a CLEAR(E<sub>n</sub>)
-        operation is required for the normalized drawing area for the <a>Intermediate Synchronic Document</a>), a GCpy and BDraw of
-        12 s<sup>-1</sup> would mean that a group of 160 <a data-lt="glyph">glyphs</a> with a <code>tts:fontSize</code> equal to 5% of the
+        <a>GCpy</a> effectively sets a limit on animating text. For example, assuming that the <a>Root Container Region</a> is ultimately
+        rendered at 1920×1080 resolution and no regions need to have background color painted (so only a <a>CLEAR</a>(E<sub>n</sub>)
+        operation is required for the normalized drawing area for the <a>Intermediate Synchronic Document</a>), a <a>GCpy</a> and <a>BDraw</a> of
+        12 s<sup>-1</sup> would mean that a group of 160 <a>glyphs</a> with a <code>tts:fontSize</code> equal to 5% of the
         <a>Root Container Region</a> height could be moved at most approximately 12 s<sup>-1</sup> ÷ (1 + ( 160 ×
         0.05<sup>2</sup> )) = 8.6 times per second.
       </aside>
 
       <aside class='example'>
-        Ren(G<sub>i</sub>) effectively sets a limit on the text rendering rate. For example, assuming that the <a>Root Container
-        Region</a> is ultimately rendered at a 1920×1080 resolution, a Ren(G<sub>i</sub>) of 1.2 s<sup>-1</sup> would mean that at
-        most 120 <a data-lt="glyph">glyphs</a> with a fontSize of 108 px (10% of 1080 px and NRGA(G<sub>i</sub>) = 0.01) could be
+        <a>Ren</a>(G<sub>i</sub>) effectively sets a limit on the text rendering rate. For example, assuming that the <a>Root Container
+        Region</a> is ultimately rendered at a 1920×1080 resolution, a <a>Ren</a>(G<sub>i</sub>) of 1.2 s<sup>-1</sup> would mean that at
+        most 120 <a>glyphs</a> with a fontSize of 108 px (10% of 1080 px and <a>NRGA(g<sub>i</sub>)</a> = 0.01) could be
         rendered every second.
       </aside>
     </section>
   
-    <section class="appendix informative">
+    <section id="index" class="appendix">
+      <!-- All the terms will magically appear here -->
+    </section>
+  
+      <section class="appendix informative">
       <h2>Accessibility Considerations</h2>
       <section>
         <h3>Impact of non-conformance</h3>
@@ -1054,7 +1055,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
           <p>Details at: <a
           href="https://github.com/w3c/imsc-hrm/issues/38">https://github.com/w3c/imsc-hrm/issues/38</a></p>
         </dd>
-        <dt>Fixed an incorrect script value in the specification of <i>GCpy</i></dt>
+        <dt>Fixed an incorrect script value in the specification of <i><a>GCpy</a></i></dt>
         <dd>
           <p>Details at: <a href="https://github.com/w3c/imsc-hrm/issues/39">https://github.com/w3c/imsc-hrm/issues/39</a></p>
         </dd>
