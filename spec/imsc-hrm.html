@@ -222,23 +222,42 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section id='terms'>
     <h2>Terms and Definitions</h2>
 
-      <p><dfn>character</dfn>. The character code property of a <dfn
-      data-cite="ttml2#terms-character-information-item">Character Information Item</dfn>.</p>
+      <p><dfn>character</dfn>. The character code property of a [[TTML2]]
+        <a data-cite="ttml2#terms-character-information-item">Character Information Item</a>.</p>
 
       <p class="note">The term <a>character</a> is for practical purposes
         the same as a <dfn>code point</dfn>, as defined by [[?i18n-glossary]].</p>
 
-      <p><dfn>empty ISD</dfn>. An <dfn
-        data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Document</dfn> with no <dfn
-      data-cite="IMSC#dfn-presented-region">presented region</dfn>.</p>
+      <p><dfn>empty ISD</dfn>. An
+        <a>Intermediate Synchronic Document</a> with
+        no
+        <a>presented region</a>.</p>
 
-      <p><dfn>non-empty ISD</dfn>. An <a>Intermediate Synchronic Document</a> with at least one <a>presented region</a>.</p>
+      <p><dfn>non-empty ISD</dfn>. An
+        <a>Intermediate Synchronic Document</a> with
+        at least one
+        <a>presented region</a>.</p>
 
       <p><dfn>error</dfn>. A failure to conform to the constraints defined by this specification.</p>
 
-      <p><dfn>IMSC Document Instance</dfn>. A <dfn data-lt="Document Instance|Document Instances"
+      <p><dfn>grapheme</dfn>. As defined by [[?i18n-glossary]] at <a data-cite="i18n-glossary#dfn-grapheme">grapheme</a>.</p>
+
+      <p><dfn>Intermediate Synchronic Document</dfn>. As defined by [[TTML2]] at
+        <a data-cite="ttml2#terms-intermediate-synchronic-document">Intermediate Synchronic Document</a>.</p>
+
+      <p><dfn>IMSC Document Instance</dfn>. A [[TTML2]] <dfn data-lt="Document Instance|Document Instances"
       data-cite="ttml2#terms-document-instance">Document Instance</dfn> that conforms to the Text Profile defined in any edition of
       [[!IMSC]].</p>
+
+      <p><dfn>presentation processor</dfn>. As defined by [[TTML2]] at <a data-cite="ttml2#terms-presentation-processor">presentation processor</a>.</p>
+
+      <p><dfn>presented region</dfn>. As defined by [[IMSC]] at 
+        <a data-cite="IMSC#dfn-presented-region">presented region</a>.</p>
+
+      <p><dfn>Related Video Object</dfn>. As defined by [[IMSC]] at <a data-cite="IMSC#dfn-related-video-object">Related Video Object</a>.</p>
+
+      <p><dfn>Root Container Region</dfn>. As defined by [[TTML2]] at <a data-cite="ttml2#terms-root-container-region">Root
+        Container Region</a>.</p>
   </section>
 
   <section id="conformance">
@@ -451,10 +470,9 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>In contrast, there is no complexity involved connecting and disconnecting the Front Buffer from the display, and
       thus no complexity associated with <a>empty ISDs</a>.</p>
 
-      <p>Whenever applicable, constraints are specified relative to <dfn data-cite="ttml2#terms-root-container-region">Root
-      Container Region</dfn> dimensions, allowing subtitle sequences to be authored independently of
-      <dfn data-cite="IMSC#dfn-related-video-object">Related Video Object</dfn>
-      resolution.</p>
+      <p>Whenever applicable, constraints are specified relative to <a>Root Container Region</a> dimensions,
+        allowing subtitle sequences to be authored independently of the
+        <a>Related Video Object</a> resolution.</p>
 
       <p>To enable scenarios where the same glyphs are used in multiple successive <a>Intermediate Synchronic Documents</a>, e.g. to convey a CEA-608/708-style roll-up (see
       [[CEA-608]] and [[CEA-708]]), a Glyph Cache stores rendered glyphs across <a>Intermediate Synchronic Documents</a>, allowing glyphs to be copied into the Presentation
@@ -803,12 +821,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
         </tbody>
       </table>
 
-      <p class='note'>While <a>DUR<sub>T</sub></a>(E<sub>n</sub>) is not affected, the choice of font by the <dfn
-      data-cite="ttml2#terms-presentation-processor">presentation processor</dfn> can increase actual rendering
-      complexity at time of presentation. For instance, a cursive font might select different glyphs for a given <a
-      data-cite="i18n-glossary#dfn-grapheme">grapheme</a> (in order to maintain joining or for the start/end of the
-      word) even in the <code>Latin</code> script. Conversely the rendering of scripts that fall in the <em>any other
-      value</em> category can in practice achieve performance comparable to, say, the <code>Latin</code> script.
+      <p class='note'>While <a>DUR<sub>T</sub></a>(E<sub>n</sub>) is not affected, the choice of font by the
+        <a>presentation processor</a> can increase actual rendering
+        complexity at time of presentation. For instance, a cursive font might select different glyphs for a given
+        <a>grapheme</a> (in order to maintain joining or for the start/end of the
+        word) even in the <code>Latin</code> script. Conversely the rendering of scripts that fall in the <em>any other
+        value</em> category can in practice achieve performance comparable to, say, the <code>Latin</code> script.
       </p>
 
       <aside class='example'>
