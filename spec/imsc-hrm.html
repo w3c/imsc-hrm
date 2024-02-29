@@ -13,10 +13,11 @@ figure img {
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class='remove'>
 var respecConfig = {
-                    specStatus:   "CR"
+                    specStatus:   "PR"
                 //,   processVersion: "2018"
-                //,   previousMaturity: "PR"
-                ,   publishDate: "2023-06-22"
+                , previousMaturity: "CR"
+                , publishDate: "2024-02-29"
+                , prEnd: "2024-03-28"
                 //,   modificationDate: "2020-04-27"
                 //,   errata: ""
                 ,   crEnd: "2023-07-20"
@@ -195,14 +196,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
     <p>Furthermore, the model is not intended to constrain readability complexity.</p>
   </section>
-  <section id='sotd'>
-    <p>For this specification to exit the CR stage, one of the following minimum
-      combinations of independent factors of verifications SHALL be demonstrated:</p>
-      <ul>
-        <li>at least 1 content producing implementation and at least 1 validating implementation; or</li>
-        <li>at least 2 independent validating implementations.</li>
-      </ul>
-
+  <section id='sotd' class='updateable-rec'>
       <p>The history of substantive changes made to this document is summarized at <a href="#substantive-changes-summary"></a>.
   </section>
 
@@ -295,9 +289,10 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
       <p>Playback systems include desktop computers, mobile devices and
         home theatre devices.</p>
 
-      <p class="note">The HRM is not a new concept: it has been included in all
-      versions and editions of [[IMSC]] and has remained substantially
-      unchanged. It is refactored herein to simplify document maintenance.</p>
+      <p class="note">The HRM is not a new concept: a version of it has been included in all versions and editions of
+      [[IMSC]]. This specification extracts the HRM into a standalone document to simplify maintenance. The First Public
+      Working Draft of this specification essentially included the HRM as it was specified in [[ttml-imsc1.2]].
+      Substantive changes made since then are summarized in <a href="#substantive-changes-summary"></a>.</p>
     </section>
   
     <section>
@@ -928,6 +923,15 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
   <section class="appendix informative">
     <h2>Acknowledgements</h2>
 
+    <p>The editor acknowledges the current and former members of the Timed Text Working Group, the members of other W3C
+    Working Groups, and industry experts in other forums who have contributed directly or indirectly to the process or
+    content of this document.</p>
+
+    <p>The editor wishes to especially acknowledge the following contributions by members: Nigel Megitt (British
+    Broadcasting Corporation) and Atsushi Shimono (W3C).</p>
+
+    <p>The editor also wishes to acknowledge Cyril Concolato (Netflix), Michael Dolan (Invited Expert) and Paul Londino
+    (Warner Bros. Discovery) for contributing content producing implementations to the implementation report.</p>
   </section>
 
   <section id="substantive-changes-summary" class="appendix informative">
