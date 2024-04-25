@@ -13,13 +13,13 @@ figure img {
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class='remove'>
 var respecConfig = {
-                    specStatus:   "PR"
+                    specStatus:   "REC"
                 //,   processVersion: "2018"
-                , previousMaturity: "CR"
-                , publishDate: "2024-02-29"
+                , previousMaturity: "PR"
+                , publishDate: "2024-04-25"
                 , prEnd: "2024-03-28"
                 //,   modificationDate: "2020-04-27"
-                //,   errata: ""
+                ,   errata: "https://www.w3.org/2024/04/imsc-hrm-errata.html"
                 ,   crEnd: "2023-07-20"
                 ,   implementationReportURI: "https://www.w3.org/wiki/TimedText/IMSC-HRM-1ED-Implementation-Report"
                 ,   sotdAfterWGinfo: "true"
@@ -186,8 +186,12 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
 <body>
   <section id='abstract'>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of
+    <p>This specification specifies a Hypothetical Render Model (HRM) that constrains the presentation complexity of
     documents that conform to the Text Profiles specified in any edition of Internet Media Subtitles and Captions ([[IMSC]]).</p>
+
+    <p>The objective of the HRM is to allow subtitle and caption authors and providers to verify that the content they
+    provide does not exceed defined complexity levels, so that playback systems can render the content synchronized with
+    the author-specified display times.</p>
 
     <p>The model is not intended as a specification of the processing requirements for implementations. For instance, while the
     model defines glyph cache for the purpose of modelling how the number of glyph drawing operations can be reduced, it neither
@@ -202,7 +206,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
 
   <section id='scope'>
     <h2>Scope</h2>
-    <p>This specification specifies an Hypothetical Render Model (HRM) that constrains the presentation complexity of a
+    <p>This specification specifies a Hypothetical Render Model (HRM) that constrains the presentation complexity of a
     <a>IMSC Document Instance</a>.</p>
   </section>
 
@@ -488,7 +492,7 @@ table.coldividers td + td { border-left:1px solid gray; text-align: center;}
     <section id='hypothetical-render-model-general'>
       <h2>Algorithm</h2>
 
-      <p>The HRM algorithm processes a sequence of <a>Intermediate Synchronic Documents</a> E<sub>n</sub>.</p>
+      <p>The HRM algorithm processes a sequence of <a>Intermediate Synchronic Documents</a> E<sub>i</sub>.</p>
 
       <p>Each successive <a>non-empty ISD</a> E<sub>n</sub> is rendered by the <a>Presentation Compositor</a> using the
       following steps in order:</p>
